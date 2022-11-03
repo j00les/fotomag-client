@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-export const Tab = createBottomTabNavigator();
+export const Tab = createMaterialBottomTabNavigator();
 export const Stack = createNativeStackNavigator();
