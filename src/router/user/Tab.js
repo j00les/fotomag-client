@@ -7,7 +7,7 @@ import HomeScreen from '../../screens/user/HomeScreen';
 import { AntDesign } from '@expo/vector-icons';
 import NotificationScreen from '../../screens/user/NotificationScreen';
 
-export default function TabNav() {
+export default function NavTab() {
   return (
     <Tab.Navigator
       barStyle={{
@@ -22,6 +22,7 @@ export default function TabNav() {
       <Tab.Screen
         options={{
           tabBarLabel: 'Home',
+
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home-outline" color={color} size={26} />
           ),
