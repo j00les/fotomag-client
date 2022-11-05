@@ -1,10 +1,9 @@
 import { Avatar } from '@rneui/themed';
 import { FlatList, View, Text, TouchableOpacity } from 'react-native';
 import { data as terdekat } from '../../../server-dummy/dummy';
-import Card from '../../components/user/HomeCard';
+import HomeCard from '../../components/user/HomeCard';
 import { styles } from '../../styles/style';
 import { LinearGradient } from 'expo-linear-gradient';
-import { WebView } from 'react-native-webview';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
@@ -16,9 +15,10 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
   const renderItem = ({ item }) => {
-    return <Card data={item} />;
+    return <HomeCard data={item} />;
   };
 
+  //trigger midtrans buat dapetin redirect--url
   async function acquireToken() {
     try {
       const { data } = await axios({

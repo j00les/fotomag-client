@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../../screens/user/HomeScreen';
 import { AntDesign } from '@expo/vector-icons';
 import NotificationScreen from '../../screens/user/NotificationScreen';
+import OrderScreen from '../../screens/user/OrderScreen';
 
 export default function NavTab() {
   return (
@@ -58,7 +59,7 @@ export default function NavTab() {
           tabBarIcon: ({ color }) => <AntDesign name="user" size={24} color={color} />,
         }}
         name="Profile"
-        component={NotificationScreen}
+        component={OrderScreen}
       />
     </Tab.Navigator>
   );

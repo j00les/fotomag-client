@@ -22,6 +22,7 @@ server.post('/pay', async (req, res, next) => {
         order_id: '299',
         gross_amount: 10000,
       },
+
       customer_details: {
         first_name: 'budiw',
         last_name: 'pratama',
@@ -32,6 +33,14 @@ server.post('/pay', async (req, res, next) => {
 
     const transactionToken = await snap.createTransaction(parameter);
     res.status(201).json(transactionToken);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+server.post('/coba-file', async (req, res, next) => {
+  try {
+    console.log(req.body);
   } catch (err) {
     console.log(err);
   }
