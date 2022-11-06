@@ -40,16 +40,23 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  //pdf
+  //map
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
+    backgroundColor: '#fff',
     alignItems: 'center',
-    marginTop: 25,
+    justifyContent: 'center',
   },
-  pdf: {
-    flex: 1,
+  map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+  },
+
+  //floating
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
   },
 });

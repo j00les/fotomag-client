@@ -2,6 +2,7 @@ import { TouchableOpacity } from 'react-native';
 import { Text } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
 import axios from 'axios';
+import MapOrder from './MapOrder';
 
 export default function Button({ reference }) {
   // mentahan
@@ -13,13 +14,14 @@ export default function Button({ reference }) {
         <Text className="text-center uppercase"> Sematkan file</Text>
       </TouchableOpacity> */
   }
+
   //handle pdf
   async function retrievePdf() {
     try {
       const file = await DocumentPicker.getDocumentAsync();
       await axios({
         method: 'post',
-        url: 'https://6445-202-80-217-184.ap.ngrok.io/coba-file',
+        url: 'https://582b-120-188-95-199.ap.ngrok.io/file',
         data: {
           dapetdong: file,
         },
@@ -28,7 +30,8 @@ export default function Button({ reference }) {
       console.log(err);
     }
   }
-  //modal
+
+  //modal (pesan button)
   if (reference === 'detail-modal') {
     return (
       <TouchableOpacity
@@ -37,6 +40,17 @@ export default function Button({ reference }) {
       >
         <Text className="text-center uppercase"> Sematkan file</Text>
       </TouchableOpacity>
+    );
+  } else if (reference === 'detail-map') {
+    return (
+      <>
+        <TouchableOpacity
+          // onPress={() => retrievePdf()}
+          className="border rounded-md mx-auto w-[100%] px-1 py-2 bg-white self-end"
+        >
+          <Text className="text-center uppercase">Map</Text>
+        </TouchableOpacity>
+      </>
     );
   }
 }

@@ -1,5 +1,6 @@
 import MapView, { MarkerAnimated } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { styles } from '../../styles/style';
 
 export default function OrderScreen() {
   return (
@@ -16,16 +17,3 @@ export default function OrderScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
-});

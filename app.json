@@ -11,21 +11,20 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "plugins": [
-      "@config-plugins/react-native-blob-util",
-      "@config-plugins/react-native-pdf"
-    ],
+    "plugins": ["@config-plugins/react-native-blob-util", "@config-plugins/react-native-pdf"],
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.j00les.fotomagclient"
     },
     "android": {
+      // "config": {
+      //   "googleMapsApiKey": "AIzaSyAkNQFV5IHPqRcPUwy2eibkgMyYjy0Et20"
+      // },
+
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

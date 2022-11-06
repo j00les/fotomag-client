@@ -4,12 +4,14 @@ import { Stack, Tab } from './src/router';
 import HomeStack from './src/router/user/Stack';
 import NavStack from './src/router/user/Stack';
 
-import { enableLatestRenderer } from 'react-native-maps';
+// import { enableLatestRenderer, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Provider } from 'react-redux';
 import store from './src/stores/store';
 
 export default function App() {
-  enableLatestRenderer();
+  // enableLatestRenderer().then(res => {
+  //   console.log(res);
+  // });
   return (
     <Provider store={store}>
       <NavigationContainer>

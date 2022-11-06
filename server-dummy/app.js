@@ -5,7 +5,6 @@ const middlewares = jsonServer.defaults();
 const ngrok = require('ngrok');
 
 server.use(middlewares);
-
 server.use(jsonServer.bodyParser);
 
 const midtransClient = require('midtrans-client');
