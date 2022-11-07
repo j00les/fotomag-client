@@ -1,4 +1,16 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Text, Dimensions, StyleSheet } from 'react-native';
+import { Poppins_400Regular, Poppins_500Medium } from '@expo-google-fonts/poppins';
+import { useFonts } from 'expo-font';
+
+export const CustomText = ({ text, font }) => {
+  let [fontsLoaded] = useFonts({
+    Poppins: Poppins_500Medium,
+  });
+
+  console.log(fontsLoaded);
+  return <Text style={{ fontFamily: 'Poppins' }}>{text}</Text>;
+};
+
 export const styles = StyleSheet.create({
   //modal
   centeredView: {
@@ -8,10 +20,11 @@ export const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalView: {
+    padding: 20,
+
     margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -48,8 +61,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    ...StyleSheet.absoluteFillObject,
+    // width: Dimensions.get('window').width,
+    // height: 500,
   },
 
   //floating
@@ -58,5 +72,16 @@ export const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
+  },
+  //palette
+
+  primary_bg: {
+    backgroundColor: '#003b4f',
+    primary_light: '#38657b',
+    primary_dark: '#001627',
+
+    secondary: '#ff7565',
+    secondary_light: '#ffa793',
+    secondary_dark: '#c7443a',
   },
 });

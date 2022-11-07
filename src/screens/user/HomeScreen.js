@@ -2,11 +2,12 @@ import { Avatar } from '@rneui/themed';
 import { FlatList, View, Text, TouchableOpacity } from 'react-native';
 import { data as terdekat } from '../../../server-dummy/dummy';
 import HomeCard from '../../components/user/HomeCard';
-import { styles } from '../../styles/style';
+import { CustomText, styles } from '../../styles/style';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import SearchMap from '../../components/user/SearchMap';
 
 export default function HomeScreen() {
   //konteks: response midtrans buat di oper ke payment screen
@@ -25,7 +26,6 @@ export default function HomeScreen() {
         method: 'post',
         url: 'https://6445-202-80-217-184.ap.ngrok.io/pay',
       });
-      console.log(data);
 
       setResponse(data);
       navigation.navigate('payment', data);
@@ -36,17 +36,17 @@ export default function HomeScreen() {
 
   return (
     <>
-      <View style={styles.color} className="items-center justify-between flex-row px-7 py-2">
+      <View className="items-center justify-between flex-row px-7 py-2">
         <View>
-          <Text className="text-lg text-white">Hi user</Text>
-          <Text className="text-white">Welcome!</Text>
+          <Text className="text-xl">Hi user</Text>
+          <Text>address disini</Text>
         </View>
 
         <View>
           <Avatar
-            size={40}
+            size={60}
             rounded
-            source={{ uri: 'https://randomuser.me/api/portraits/men/36.jpg' }}
+            source={{ uri: 'https://randomuser.me/api/portraits/men/45.jpg' }}
           />
         </View>
       </View>
@@ -55,7 +55,7 @@ export default function HomeScreen() {
         <View id="balance-container" className=" h-[35%] rounded-lg pb-5">
           <LinearGradient
             className="rounded-lg h-[100%]"
-            colors={['#4c669f', '#3b5998', '#192f6a']}
+            colors={['#001627', '#003b4f', '#38657b']}
             style={styles.button}
           >
             <View className="items-center mt-4">

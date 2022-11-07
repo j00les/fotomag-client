@@ -1,10 +1,11 @@
+import * as DocumentPicker from 'expo-document-picker';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { Modal, TouchableOpacity, Text, View, Pressable, TextInput } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import Button from '../../components/user/Button';
-// import MapOrder from '../../components/user/MapOrder';
+import { Feather } from '@expo/vector-icons';
 
 import { styles } from '../../styles/style';
 
@@ -12,23 +13,29 @@ export default function DetailScreen({ route }) {
   // transaction/:idAtk
   // req body buat post order
   // fileName, totalPages, isJilid, colorVariant, duplicate, address,totalPrice
-
   const dispatch = useDispatch();
-  const { id } = route.params;
   const [modalVisible, setModalVisible] = useState(false);
-  const [text, setText] = useState('');
   const [jilid, setJilid] = useState('unchecked');
   const [color, setColor] = useState('unchecked');
   const [black, setBlack] = useState('unchecked');
   const [orderInput, setOrderInput] = useState({
     colorVariant: '',
-    isJilid: false,
+    isJilid: '',
     duplicate: 0,
-    fileName: null,
+    fileUrl: null,
   });
 
   const navigation = useNavigation();
   console.log(orderInput);
+
+  async function retrievePdf() {
+    try {
+      const file = await DocumentPicker.getDocumentAsync();
+      setOrderInput({ ...orderInput, fileUrl: file.uri });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   function changeColor(v) {
     if (v === 'Berwarna') {
@@ -43,16 +50,15 @@ export default function DetailScreen({ route }) {
   }
 
   function changeJilid() {
-    if (orderInput.isJilid) {
+    if (orderInput.isJilid === 'YES') {
       setJilid('unchecked');
-      setOrderInput({ ...orderInput, isJilid: false });
+      setOrderInput({ ...orderInput, isJilid: 'NO' });
     } else {
       setJilid('checked');
-      setOrderInput({ ...orderInput, isJilid: true });
+      setOrderInput({ ...orderInput, isJilid: 'YES' });
     }
   }
 
-  // setOrderInput({ ...orderInput, duplicate: text });
   return (
     <View className="px-7 py-2">
       <View className="border p-10 bg-red-400"></View>
@@ -69,10 +75,21 @@ export default function DetailScreen({ route }) {
           {/* radio group */}
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text className="text-xl">Pesanan</Text>
-              <Button reference="detail-modal" />
+              <View className="flex-row items-center w-full  ">
+                <Text className="text-xl">Pesanan Baru</Text>
+              </View>
+
+              <TouchableOpacity
+                className="rounded-lg absolute right-4 top-2"
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Feather name="x-circle" size={24} color="black" />
+              </TouchableOpacity>
+
+              <Button func={retrievePdf} reference="send-pdf" />
+
               {/* radio */}
-              <View className="flex-row">
+              <View className="flex-row mt-2">
                 <View className="flex-row-reverse items-center">
                   <Text>Warna</Text>
                   <RadioButton status={color} onPress={() => changeColor('Berwarna')} />
@@ -90,7 +107,7 @@ export default function DetailScreen({ route }) {
                 </View>
               </View>
 
-              <View className="flex-row items-center">
+              <View className="flex-row items-center mt-2">
                 <Text>Rangkap: </Text>
                 <TextInput
                   onChangeText={text => setOrderInput({ ...orderInput, duplicate: text })}
@@ -101,15 +118,13 @@ export default function DetailScreen({ route }) {
                 />
               </View>
 
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </Pressable>
+              {/*  */}
 
               <Pressable
-                onPress={() => navigation.navigate('map-order', { orderData: orderInput })}
+                onPress={() => {
+                  setModalVisible(false);
+                  navigation.navigate('map-order', { orderData: orderInput });
+                }}
               >
                 <Text>Map</Text>
               </Pressable>
