@@ -17,6 +17,7 @@ const longitudeDelta = latitudeDelta * (screen.width / screen.height);
 export default function MapOrder({ route }) {
   const mapRef = useRef();
   // const markerRef = useRef();
+
   const order = route?.params?.orderData;
 
   const [st, setSt] = useState('');
@@ -33,7 +34,6 @@ export default function MapOrder({ route }) {
   });
 
   function handleCoordinate(coordinate) {
-    // console.log(e);
     setRegion({ ...region, markers: coordinate });
     mapRef.current?.animateToRegion({ ...coordinate, ...region.delta }, 1000);
   }
@@ -98,7 +98,7 @@ export default function MapOrder({ route }) {
         <Text>{st}</Text>
       </View>
 
-      <Button reference={'map-button'} />
+      <Button order={order} reference={'map-button'} />
     </View>
   );
 }

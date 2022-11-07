@@ -2,8 +2,14 @@ import { TouchableOpacity } from 'react-native';
 import { Text } from 'react-native';
 import axios from 'axios';
 import MapOrder from './MapOrder';
+import { useDispatch } from 'react-redux';
+import { createOrder } from '../../stores/actions/transactionAction';
 
-export default function Button({ reference, func }) {
+export default function Button({ reference, func, order }) {
+  const dispatch = useDispatch();
+
+  console.log(order);
+
   // mentahan
   {
     /* <TouchableOpacity
@@ -37,7 +43,10 @@ export default function Button({ reference, func }) {
     );
   } else if (reference === 'map-button') {
     return (
-      <TouchableOpacity className="border rounded-md  py-2 bg-white self-end absolute bottom-2 right-4">
+      <TouchableOpacity
+        onPress={() => dispatch(createOrder(order))}
+        className="border rounded-md  py-2 bg-white self-end absolute bottom-2 right-4"
+      >
         <Text className="text-center uppercase"> Selanjutnya</Text>
       </TouchableOpacity>
     );

@@ -26,8 +26,8 @@ export default function DetailScreen({ route }) {
   });
 
   const navigation = useNavigation();
-  console.log(orderInput);
 
+  console.log(orderInput);
   async function retrievePdf() {
     try {
       const file = await DocumentPicker.getDocumentAsync();

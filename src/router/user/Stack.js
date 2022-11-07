@@ -1,6 +1,7 @@
 import { Stack, Tab } from '..';
 import MapOrder from '../../components/user/MapOrder';
 import DetailScreen from '../../screens/user/DetailScreen';
+import OrderScreen from '../../screens/user/OrderScreen';
 import PaymentScreen from '../../screens/user/PaymentScreen';
 import NavTab from './Tab';
 
@@ -20,6 +21,7 @@ export default function UserStack() {
       <Stack.Screen name="payment" component={PaymentScreen} />
       <Stack.Screen name="detail" component={DetailScreen} />
       <Stack.Screen name="map-order" component={MapOrder} />
+      <Stack.Screen name="order-screen" component={OrderScreen} />
     </Stack.Navigator>
   );
 }
