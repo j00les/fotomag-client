@@ -14,11 +14,10 @@ export default function App() {
   // });
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <NavStack />
-        {/* <TabNav /> */}
-        <StatusBar />
-      </NavigationContainer>
+      {/* <NavigationContainer> */}
+      {/* <NavStack />
+         <StatusBar />
+      </NavigationContainer> */}
     </Provider>
   );
 }
