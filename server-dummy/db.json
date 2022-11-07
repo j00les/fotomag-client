@@ -1,0 +1,38 @@
+{
+  "tyl": [
+    { "long_name": "17a", "short_name": "17a", "types": ["street_number"] },
+    { "long_name": "Jalan Maya Garden", "short_name": "Jl. Maya Garden", "types": ["route"] },
+    {
+      "long_name": "RT 07",
+      "short_name": "RT 07",
+      "types": ["administrative_area_level_7", "political"]
+    },
+    {
+      "long_name": "RW 08",
+      "short_name": "RW 08",
+      "types": ["administrative_area_level_6", "political"]
+    },
+    {
+      "long_name": "Kebayoran Lama Utara",
+      "short_name": "Kby. Lama Utara",
+      "types": ["administrative_area_level_4", "political"]
+    },
+    {
+      "long_name": "Kecamatan Kebayoran Lama",
+      "short_name": "Kec. Kby. Lama",
+      "types": ["administrative_area_level_3", "political"]
+    },
+    {
+      "long_name": "Kota Jakarta Selatan",
+      "short_name": "Kota Jakarta Selatan",
+      "types": ["administrative_area_level_2", "political"]
+    },
+    {
+      "long_name": "Daerah Khusus Ibukota Jakarta",
+      "short_name": "Daerah Khusus Ibukota Jakarta",
+      "types": ["administrative_area_level_1", "political"]
+    },
+    { "long_name": "Indonesia", "short_name": "ID", "types": ["country", "political"] },
+    { "long_name": "12240", "short_name": "12240", "types": ["postal_code"] }
+  ]
+}

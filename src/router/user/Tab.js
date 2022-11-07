@@ -6,36 +6,37 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../../screens/user/HomeScreen';
 import { AntDesign } from '@expo/vector-icons';
 import NotificationScreen from '../../screens/user/NotificationScreen';
+import OrderScreen from '../../screens/user/OrderScreen';
 
-export default function TabNav() {
+export default function NavTab() {
   return (
     <Tab.Navigator
+      labeled={false}
       barStyle={{
         borderTopRightRadius: 14,
         borderTopLeftRadius: 14,
         borderTopWidth: 10,
-        borderTopColor: 'gray',
-        backgroundColor: 'gray',
+        borderTopColor: '#003b4f',
+        backgroundColor: '#003b4f',
       }}
-      activeColor="purple"
+      activeColor="#ffff"
     >
       <Tab.Screen
         options={{
-          tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home-outline" color={color} size={26} />
           ),
 
           headerShown: false,
         }}
-        name="Home"
+        name="home"
         component={HomeScreen}
       />
 
       <Tab.Screen
         options={{
           tabBarLabel: 'History',
-          tabBarIcon: ({ color }) => <MaterialIcons name="history" size={24} color={color} />,
+          tabBarIcon: ({ color }) => <MaterialIcons name="history" size={25} color={color} />,
         }}
         name="History"
         component={HistoryScreen}
@@ -45,7 +46,7 @@ export default function TabNav() {
         options={{
           tabBarLabel: 'Notification',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="notifications-outline" size={24} color={color} />
+            <Ionicons name="notifications-outline" size={23} color={color} />
           ),
         }}
         name="Notification"
@@ -54,10 +55,10 @@ export default function TabNav() {
 
       <Tab.Screen
         options={{
-          tabBarIcon: ({ color }) => <AntDesign name="user" size={24} color={color} />,
+          tabBarIcon: ({ color }) => <AntDesign name="user" size={22} color={color} />,
         }}
         name="Profile"
-        component={NotificationScreen}
+        component={OrderScreen}
       />
     </Tab.Navigator>
   );

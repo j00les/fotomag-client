@@ -1,5 +1,5 @@
 import { FlatList, View } from 'react-native';
-import { data as history } from '../../../dummy';
+import { data as history } from '../../../server-dummy/dummy';
 import HistoryCard from '../../components/user/HistoryCard';
 
 export default function HistoryScreen() {
