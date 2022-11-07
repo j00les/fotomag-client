@@ -14,13 +14,13 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-        {}
-        <Stack.Screen name="MerchantTab" component={MerchantTab} />
+
+        <Stack.Screen
+          name="MerchantTab"
+          component={MerchantTab}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
-      {/* <TabNav />  */}
-      {/* <LoginScreen /> */}
-      {/* <RegisterScreen /> */}
-      {/* <HomeMerchant /> */}
     </NavigationContainer>
   );
 }
