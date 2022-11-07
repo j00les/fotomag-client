@@ -14,13 +14,13 @@ const screen = Dimensions.get('window');
 const longitudeDelta = latitudeDelta * (screen.width / screen.height);
 
 // const longitudeDelta = latitudeDelta / (screen.width / screen.height);
-
 export default function MapOrder({ route }) {
   const mapRef = useRef();
-  const markerRef = useRef();
+  // const markerRef = useRef();
   const order = route?.params?.orderData;
 
   const [st, setSt] = useState('');
+  const [loc, setLoc] = useState({});
   const [region, setRegion] = useState({
     delta: {
       latitudeDelta,
@@ -49,13 +49,16 @@ export default function MapOrder({ route }) {
         .then(res => {
           const add = res.data.results[0].formatted_address;
           setSt(add);
+          setLoc(region.markers);
+          order.address = add;
+          order.location = loc;
         })
 
         .catch(err => console.log(err));
     }
   }, [region.markers]);
 
-  // console.log(region);
+  // region.markers);
   // console.log(order);
   return (
     <View style={{ flex: 1, ...StyleSheet.absoluteFillObject }}>
@@ -79,7 +82,6 @@ export default function MapOrder({ route }) {
             },
           });
         }}
-        // region={region.markers}
         style={styles.map}
         onPress={e => {
           handleCoordinate(e.nativeEvent.coordinate);
