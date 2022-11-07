@@ -8,7 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 import NotificationScreen from '../../screens/user/NotificationScreen';
 import OrderScreen from '../../screens/user/OrderScreen';
 
-export default function NavTab() {
+export default function UserTab() {
   return (
     <Tab.Navigator
       labeled={false}
