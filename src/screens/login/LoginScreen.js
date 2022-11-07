@@ -1,5 +1,5 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import LottieView from "lottie-react-native";
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import LottieView from 'lottie-react-native';
 
 export default LoginScreen = ({ navigation }) => {
   return (
@@ -10,11 +10,7 @@ export default LoginScreen = ({ navigation }) => {
           <Text className="text-xl">Login to continue</Text>
         </View>
         <View className="h-[75%] w-full bg-red-300 rounded-b-2xl">
-          <LottieView
-            source={require("../../../assets/merchanLottie/Login.json")}
-            autoPlay
-            loop
-          />
+          <LottieView source={require('../../../assets/merchanLottie/Login.json')} autoPlay loop />
         </View>
       </View>
       <View className="flex-1 w-full rounded-t-3xl bg-blue-200 items-center">
@@ -29,7 +25,7 @@ export default LoginScreen = ({ navigation }) => {
           </View>
           <View className="items-center">
             <TouchableOpacity
-              onPress={() => navigation.navigate("MerchantTab")}
+              onPress={() => navigation.navigate('UserTab')}
               className="border-2 rounded-xl w-[50%] h-9 bg-blue-400 justify-center"
             >
               <Text className="text-center">Login</Text>

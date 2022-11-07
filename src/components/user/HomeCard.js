@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function HomeCard({ data: merchantData }) {
   const navigation = useNavigation();
-  // console.log(merchantData.id);
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('detail', { id: merchantData.id })}

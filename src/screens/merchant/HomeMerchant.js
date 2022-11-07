@@ -1,4 +1,4 @@
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 export default HomeMerchant = () => {
   return (
@@ -12,7 +12,7 @@ export default HomeMerchant = () => {
             <TouchableOpacity className="w-full h-full p-2">
               <Image
                 source={{
-                  uri: "https://img.icons8.com/ios-filled/512/guest-male.png",
+                  uri: 'https://img.icons8.com/ios-filled/512/guest-male.png',
                 }}
                 className="w-[100%] h-[100%] "
               />

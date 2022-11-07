@@ -4,7 +4,7 @@ import DetailScreen from '../../screens/user/DetailScreen';
 import PaymentScreen from '../../screens/user/PaymentScreen';
 import NavTab from './Tab';
 
-export default function NavStack() {
+export default function UserStack() {
   return (
     <Stack.Navigator>
       {/* root nav */}
@@ -16,6 +16,7 @@ export default function NavStack() {
         name="kkk"
         component={NavTab}
       />
+
       <Stack.Screen name="payment" component={PaymentScreen} />
       <Stack.Screen name="detail" component={DetailScreen} />
       <Stack.Screen name="map-order" component={MapOrder} />
