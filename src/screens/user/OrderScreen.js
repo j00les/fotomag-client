@@ -1,19 +1,18 @@
-import MapView, { MarkerAnimated } from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import { styles } from '../../styles/style';
+import { useNavigation } from '@react-navigation/native';
+import { FlatList, TouchableOpacity, View, Text } from 'react-native';
+import OrderCard from '../../components/user/OrderCard';
+import { data as order } from '../../../server-dummy/dummy';
 
 export default function OrderScreen() {
+  const navigation = useNavigation();
+
+  const renderItem = ({ item }) => {
+    return <OrderCard data={item} />;
+  };
+
   return (
-    <View style={styles.container}>
-      <MapView
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        style={styles.map}
-      ></MapView>
+    <View className="h-[60%]  mb-4">
+      <FlatList data={order} renderItem={renderItem} />
     </View>
   );
 }

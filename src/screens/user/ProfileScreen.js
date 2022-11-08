@@ -1,9 +1,9 @@
 import { View, Text } from 'react-native';
 
-export default function NotificationScreen() {
+export default function ProfileScreen() {
   return (
     <View>
-      <Text>notif</Text>
+      <Text>ini proifle</Text>
     </View>
   );
 }

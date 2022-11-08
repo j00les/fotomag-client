@@ -2,7 +2,6 @@ import { AntDesign } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
-import { FAB } from 'react-native-paper';
 import { styles } from '../../styles/style';
 import SearchMap from './SearchMap';
 import axios from 'axios';
@@ -14,9 +13,10 @@ const screen = Dimensions.get('window');
 const longitudeDelta = latitudeDelta * (screen.width / screen.height);
 
 // const longitudeDelta = latitudeDelta / (screen.width / screen.height);
-export default function MapOrder({ route }) {
+export default function MapOrder({ route, reference }) {
   const mapRef = useRef();
   // const markerRef = useRef();
+
   const order = route?.params?.orderData;
 
   const [st, setSt] = useState('');
@@ -33,7 +33,6 @@ export default function MapOrder({ route }) {
   });
 
   function handleCoordinate(coordinate) {
-    // console.log(e);
     setRegion({ ...region, markers: coordinate });
     mapRef.current?.animateToRegion({ ...coordinate, ...region.delta }, 1000);
   }
@@ -58,8 +57,8 @@ export default function MapOrder({ route }) {
     }
   }, [region.markers]);
 
-  // region.markers);
-  // console.log(order);
+  console.log(region.markers);
+
   return (
     <View style={{ flex: 1, ...StyleSheet.absoluteFillObject }}>
       <MapView
@@ -98,7 +97,7 @@ export default function MapOrder({ route }) {
         <Text>{st}</Text>
       </View>
 
-      <Button reference={'map-button'} />
+      <Button order={order} reference={'map-button'} />
     </View>
   );
 }
