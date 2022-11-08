@@ -1,6 +1,10 @@
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { useState } from "react";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import Card from "../../components/merchant/Card";
 
 export default HomeMerchant = () => {
+  let data = [1, 2, 3, 4, 5, 2, 3, 35, 325];
+  const [refresh, setRefresh] = useState(false);
   return (
     <View className="flex-1 items-center ">
       <View className="h-[16%] w-full bg-red-300 rounded-b-3xl ">
@@ -12,7 +16,7 @@ export default HomeMerchant = () => {
             <TouchableOpacity className="w-full h-full p-2">
               <Image
                 source={{
-                  uri: 'https://img.icons8.com/ios-filled/512/guest-male.png',
+                  uri: "https://img.icons8.com/ios-filled/512/guest-male.png",
                 }}
                 className="w-[100%] h-[100%] "
               />
@@ -27,9 +31,20 @@ export default HomeMerchant = () => {
             <Text>Orderan</Text>
           </View>
           <View className="bg-white h-[1%]" />
-          <View className="bg-yellow-200 h-full rounded-t-3xl">
-            <View className="p-4 h-full">
-              <Text>FlatList</Text>
+          <View className="bg-yellow-200 h-[78%] rounded-t-3xl">
+            <View className="p-4 mt-3 h-full">
+              <FlatList
+                data={data}
+                renderItem={({ data }) => <Card data={data} />}
+                refreshing={refresh}
+                onRefresh={() => {
+                  setRefresh(true),
+                    setTimeout(() => {
+                      console.log("wow");
+                    }, 5000),
+                    setRefresh(false);
+                }}
+              />
             </View>
           </View>
         </View>
