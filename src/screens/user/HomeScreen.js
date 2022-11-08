@@ -6,18 +6,69 @@ import { CustomText, styles } from '../../styles/style';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import * as Location from 'expo-location';
 import axios from 'axios';
 import SearchMap from '../../components/user/SearchMap';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getToken } from '../../stores/actions/userAction';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen() {
   //konteks: response midtrans buat di oper ke payment screen
   const [_, setResponse] = useState('');
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const dispatch = useDispatch();
 
   const navigation = useNavigation();
 
   const renderItem = ({ item }) => {
     return <HomeCard data={item} />;
   };
+
+  const getData = async key => {
+    try {
+      const keyz = await AsyncStorage.getItem(key);
+      return keyz;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  // getData('@access_token').then(res => {
+  //   console.log(res, 'yalah');
+  // });
+
+  useEffect(() => {
+    // console.log('jalan ga sih');
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+      // console.log(status, 'log -status');
+
+      let location = await Location.getCurrentPositionAsync({});
+      // console.log(location, 'location- loggz');
+      setLocation(location);
+    })();
+
+    // getData('@access_token').then(res => {
+    //   dispatch(getToken(res));
+    // });
+    //token
+  }, []);
+
+  // console.log(token);
+
+  // console.log(location);
+  // console.log(location);
+  // let text = 'Waiting..';
+  // if (errorMsg) {
+  //   text = errorMsg;
+  // } else if (location) {
+  //   tex
 
   //trigger midtrans buat dapetin redirect--url
   async function acquireToken() {

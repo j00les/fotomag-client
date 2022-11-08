@@ -5,7 +5,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../../screens/user/HomeScreen';
 import { AntDesign } from '@expo/vector-icons';
-import NotificationScreen from '../../screens/user/OrderScreen';
 import OrderScreen from '../../screens/user/OrderScreen';
 import ProfileScreen from '../../screens/user/ProfileScreen';
 
@@ -38,6 +37,8 @@ export default function UserTab() {
         options={{
           tabBarLabel: 'History',
           tabBarIcon: ({ color }) => <MaterialIcons name="history" size={25} color={color} />,
+
+          headerShown: true,
         }}
         name="History"
         component={HistoryScreen}

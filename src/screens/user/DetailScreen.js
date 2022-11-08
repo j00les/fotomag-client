@@ -16,13 +16,14 @@ export default function DetailScreen({ route }) {
   const [black, setBlack] = useState('unchecked');
   const [orderInput, setOrderInput] = useState({
     colorVariant: '',
-    isJilid: '',
+    isJilid: 'NO',
     duplicate: 0,
     fileUrl: {
       name: '',
       uri: '',
       type: '',
     },
+    atkId: route.params.id,
   });
 
   const navigation = useNavigation();

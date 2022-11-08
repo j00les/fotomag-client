@@ -1,34 +1,44 @@
-const baseURL = 'https://b184-36-78-13-68.ngrok.io';
+const baseURL = 'https://0ba3-202-80-217-104.ap.ngrok.io';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-// const baseURL = 'http://localhost:8080';
+import { getAccessToken, updateTransactionToPending } from '../slices/userSlice';
 
-//handle order form
+export const createOrder = order => async (dispatch, getState) => {
+  try {
+    const formData = new FormData();
+    const { access_token } = getState().user;
 
-export const createOrder = order => dispatch => {
-  const formData = new FormData();
-  const { address, fileUrl, colorVariant, isJilid, duplicate, location } = order;
+    const { address, fileUrl, colorVariant, isJilid, duplicate, location, atkId } = order;
+    const removeQt = access_token.replace(/"/g, '');
+    console.log(fileUrl);
 
-  formData.append('fileUrl', fileUrl);
-  formData.append('address', address);
-  formData.append('colorVariant', colorVariant);
-  formData.append('isJilid', isJilid);
-  formData.append('location', location);
-  formData.append('duplicate', duplicate);
-
-  axios({
-    url: `${baseURL}/coba-dong`,
-    method: 'post',
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-    data: {
-      formData,
-    },
-  })
-    .then(data => {
-      console.log(data);
-    })
-    .catch(err => {
-      console.log(err);
+    formData.append('address', address);
+    formData.append('colorVariant', colorVariant);
+    formData.append('isJilid', isJilid);
+    formData.append('location', location);
+    formData.append('duplicate', duplicate);
+    formData.append('fileURL', {
+      uri: fileUrl.uri,
+      type: fileUrl.type,
+      name: fileUrl.name,
     });
+
+    const { data } = await axios.post(`${baseURL}/transaction/${atkId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        access_token: removeQt,
+      },
+      transformRequest: (data, headers) => {
+        return data; // this is doing the trick
+      },
+    });
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getToken = val => dispatch => {
+  dispatch(getAccessToken(val));
 };

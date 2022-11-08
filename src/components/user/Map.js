@@ -15,8 +15,6 @@ const longitudeDelta = latitudeDelta * (screen.width / screen.height);
 // const longitudeDelta = latitudeDelta / (screen.width / screen.height);
 export default function MapOrder({ route, reference }) {
   const mapRef = useRef();
-  // const markerRef = useRef();
-
   const order = route?.params?.orderData;
 
   const [st, setSt] = useState('');
@@ -57,7 +55,7 @@ export default function MapOrder({ route, reference }) {
     }
   }, [region.markers]);
 
-  console.log(region.markers);
+  // console.log(region.markers);
 
   return (
     <View style={{ flex: 1, ...StyleSheet.absoluteFillObject }}>
