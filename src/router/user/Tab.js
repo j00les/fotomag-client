@@ -5,8 +5,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../../screens/user/HomeScreen';
 import { AntDesign } from '@expo/vector-icons';
-import NotificationScreen from '../../screens/user/NotificationScreen';
+import NotificationScreen from '../../screens/user/OrderScreen';
 import OrderScreen from '../../screens/user/OrderScreen';
+import ProfileScreen from '../../screens/user/ProfileScreen';
 
 export default function UserTab() {
   return (
@@ -49,8 +50,8 @@ export default function UserTab() {
             <Ionicons name="notifications-outline" size={23} color={color} />
           ),
         }}
-        name="Notification"
-        component={NotificationScreen}
+        name="Order"
+        component={OrderScreen}
       />
 
       <Tab.Screen
@@ -58,7 +59,7 @@ export default function UserTab() {
           tabBarIcon: ({ color }) => <AntDesign name="user" size={22} color={color} />,
         }}
         name="Profile"
-        component={OrderScreen}
+        component={ProfileScreen}
       />
     </Tab.Navigator>
   );

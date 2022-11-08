@@ -1,11 +1,18 @@
-import MapView, { MarkerAnimated } from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import { styles } from '../../styles/style';
+import { useNavigation } from '@react-navigation/native';
+import { FlatList, TouchableOpacity, View, Text } from 'react-native';
+import OrderCard from '../../components/user/OrderCard';
+import { data as order } from '../../../server-dummy/dummy';
 
 export default function OrderScreen() {
+  const navigation = useNavigation();
+
+  const renderItem = ({ item }) => {
+    return <OrderCard data={item} />;
+  };
+
   return (
-    <View>
-      <Text>ini order screen guyz</Text>
+    <View className="h-[60%]  mb-4">
+      <FlatList data={order} renderItem={renderItem} />
     </View>
   );
 }

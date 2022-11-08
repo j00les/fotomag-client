@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const transactionSlice = createSlice({
-  name: 'transaction',
+export const userSlice = createSlice({
+  name: 'user',
   initialState: {
     value: 0,
   },
@@ -18,4 +18,4 @@ export const transactionSlice = createSlice({
 
 // export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
-export default transactionSlice.reducer;
+export default userSlice.reducer;

@@ -38,7 +38,7 @@ export default function HomeScreen() {
     <>
       <View className="items-center justify-between flex-row px-7 py-2">
         <View>
-          <Text className="text-xl">Hi user</Text>
+          <Text className="text-xl">Halo user</Text>
           <Text>address disini</Text>
         </View>
 
@@ -59,7 +59,7 @@ export default function HomeScreen() {
             style={styles.button}
           >
             <View className="items-center mt-4">
-              <Text className="text-white">Balance</Text>
+              <Text className="text-white mb-2">Saldo</Text>
               <Text className="text-4xl text-white">Rp.2.000.000</Text>
             </View>
 
@@ -74,7 +74,7 @@ export default function HomeScreen() {
           </LinearGradient>
         </View>
 
-        <Text>Toko terdekat</Text>
+        <Text className="ml-3 text-base">Toko terdekat</Text>
 
         <View className="h-[60%]  mb-4">
           <FlatList data={terdekat} renderItem={renderItem} />

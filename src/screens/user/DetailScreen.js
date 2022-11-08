@@ -10,10 +10,6 @@ import { Feather } from '@expo/vector-icons';
 import { styles } from '../../styles/style';
 
 export default function DetailScreen({ route }) {
-  // transaction/:idAtk
-  // req body buat post order
-  // fileName, totalPages, isJilid, colorVariant, duplicate, address,totalPrice
-  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [jilid, setJilid] = useState('unchecked');
   const [color, setColor] = useState('unchecked');
@@ -22,16 +18,27 @@ export default function DetailScreen({ route }) {
     colorVariant: '',
     isJilid: '',
     duplicate: 0,
-    fileUrl: null,
+    fileUrl: {
+      name: '',
+      uri: '',
+      type: '',
+    },
   });
 
   const navigation = useNavigation();
 
-  console.log(orderInput);
   async function retrievePdf() {
     try {
       const file = await DocumentPicker.getDocumentAsync();
-      setOrderInput({ ...orderInput, fileUrl: file.uri });
+      // console.log(file);
+      setOrderInput({
+        ...orderInput,
+        fileUrl: {
+          name: file.name,
+          uri: file.uri,
+          type: file.mimeType,
+        },
+      });
     } catch (err) {
       console.log(err);
     }
@@ -61,7 +68,17 @@ export default function DetailScreen({ route }) {
 
   return (
     <View className="px-7 py-2">
-      <View className="border p-10 bg-red-400"></View>
+      <View className="border h-[50%] bg-red-400">
+        <Text>foto disini</Text>
+      </View>
+
+      <View className="mt-2">
+        <Text className="text-2xl">Toko Makmur jaya Abadi</Text>
+        <Text>Jalan blablabla</Text>
+        <Text>Print Warna: Rp.200/lembar</Text>
+        <Text>Print Hitam/Putih: Rp.500/lembar</Text>
+        <Text>Jilid: Rp.10.000</Text>
+      </View>
 
       <Pressable
         className="border rounded-md  w-[15%] py-2  bg-white self-end"
@@ -72,11 +89,10 @@ export default function DetailScreen({ route }) {
 
       <View style={styles.centeredView}>
         <Modal animationType="fade" transparent={true} visible={modalVisible}>
-          {/* radio group */}
           <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <View className="flex-row items-center w-full  ">
-                <Text className="text-xl">Pesanan Baru</Text>
+            <View style={styles.modalView} className="w-[65%] h-[50%]">
+              <View className="flex-row items-center justify-center w-full">
+                <Text className="text-center text-xl">Pesanan Baru</Text>
               </View>
 
               <TouchableOpacity
@@ -86,48 +102,59 @@ export default function DetailScreen({ route }) {
                 <Feather name="x-circle" size={24} color="black" />
               </TouchableOpacity>
 
+              <Text className="mr-[220px] mt-4 mb-1 text-base">File : </Text>
               <Button func={retrievePdf} reference="send-pdf" />
 
               {/* radio */}
-              <View className="flex-row mt-2">
+
+              <Text className="mt-4 text-base text-left mr-[220px]">Tipe :</Text>
+              <View className="flex-row mt-2 border px-2 rounded-md">
                 <View className="flex-row-reverse items-center">
                   <Text>Warna</Text>
-                  <RadioButton status={color} onPress={() => changeColor('Berwarna')} />
+
+                  <RadioButton
+                    color="#003b4f"
+                    status={color}
+                    onPress={() => changeColor('Berwarna')}
+                  />
                 </View>
 
                 {/* radio */}
                 <View className="flex-row-reverse items-center">
                   <Text>Hitam/Putih</Text>
-                  <RadioButton status={black} onPress={() => changeColor('Hitamputih')} />
+                  <RadioButton
+                    color="#003b4f"
+                    status={black}
+                    onPress={() => changeColor('Hitamputih')}
+                  />
                 </View>
 
                 <View className="flex-row-reverse items-center">
                   <Text>Jilid</Text>
-                  <RadioButton status={jilid} onPress={() => changeJilid()} />
+                  <RadioButton color="#003b4f" status={jilid} onPress={() => changeJilid()} />
                 </View>
               </View>
 
-              <View className="flex-row items-center mt-2">
-                <Text>Rangkap: </Text>
+              <Text className="mr-[195px] text-base mt-4">Duplikat :</Text>
+              <View className="flex-row justify-start items-center mt-2 mr-[220px] ">
                 <TextInput
+                  placeholder="0"
                   onChangeText={text => setOrderInput({ ...orderInput, duplicate: text })}
-                  // value={text}
                   keyboardType="number-pad"
-                  placeholder="rangkap"
-                  className="border"
+                  className="border text-center rounded-md w-8"
                 />
               </View>
 
-              {/*  */}
-
-              <Pressable
+              <Text className="mr-[200px] mt-3 mb-1 text-base">Alamat :</Text>
+              <TouchableOpacity
+                className="border mr-[180px]  bg-primary  rounded-md py-2 px-1 "
                 onPress={() => {
                   setModalVisible(false);
                   navigation.navigate('map-order', { orderData: orderInput });
                 }}
               >
-                <Text>Map</Text>
-              </Pressable>
+                <Text className="text-center text-white uppercase">antar ke </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </Modal>

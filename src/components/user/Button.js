@@ -1,9 +1,9 @@
 import { TouchableOpacity } from 'react-native';
 import { Text } from 'react-native';
 import axios from 'axios';
-import MapOrder from './MapOrder';
+// import MapOrder from './Map';
+import { createOrder } from '../../stores/actions/userAction/';
 import { useDispatch } from 'react-redux';
-import { createOrder } from '../../stores/actions/transactionAction';
 
 export default function Button({ reference, func, order }) {
   const dispatch = useDispatch();
@@ -25,9 +25,9 @@ export default function Button({ reference, func, order }) {
     return (
       <TouchableOpacity
         onPress={() => func()}
-        className="border mt-3 rounded-md mx-auto w-[100%] py-2 bg-white self-end"
+        className="border  rounded-md mx-auto w-[100%] py-2 bg-white self-end"
       >
-        <Text className="text-center uppercase"> Sematkan file</Text>
+        <Text className="text-center uppercase">Unggah FIle</Text>
       </TouchableOpacity>
     );
   } else if (reference === 'detail-map') {
