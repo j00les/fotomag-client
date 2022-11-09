@@ -55,10 +55,10 @@ export default function MainStack() {
     <NavigationContainer>
       <StatusBar />
       <Stack.Navigator>
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+        {/* <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="RegisterScreen" component={RegisterScreen} /> */}
 
-        <Stack.Screen name="MerchantTab" component={MerchantTab} options={{ headerShown: false }} />
+        {/* <Stack.Screen name="MerchantTab" component={MerchantTab} options={{ headerShown: false }} /> */}
 
         <Stack.Screen name="UserTab" component={UserStack} options={{ headerShown: false }} />
 
