@@ -8,7 +8,7 @@ import NavTab from "./Tab";
 
 export default function UserStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="">
       {/* root nav */}
       <Stack.Screen
         options={{

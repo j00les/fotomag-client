@@ -43,26 +43,26 @@ export default function MapTracking({ route, reference }) {
     let data = await Location.getCurrentPositionAsync({});
     console.log(data, "ini location di client");
     setLocation(data);
-// merchant
+    // merchant
 
     return data;
   };
-// slove entar
-    socket.emit('updateLocation', location);
-  };
+  // slove entar
+  socket.emit("updateLocation", location);
+  // };
   let go = true;
   const end = () => {
     clearInterval(intervalID),
-      console.log('masuk end'),
-      setPaket('Bukan delivery'),
+      console.log("masuk end"),
+      setPaket("Bukan delivery"),
       console.log(paket);
   };
   useEffect(() => {
     let intervalID;
     // get().then(() => {
     //   console.log('izin dapet');
-    // });
-// development
+  });
+  // development
 
   useEffect(() => {
     get();
