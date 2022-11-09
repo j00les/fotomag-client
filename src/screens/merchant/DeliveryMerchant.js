@@ -1,8 +1,12 @@
-import { FlatList, Text, View } from "react-native";
+import { Button, FlatList, Text, View } from "react-native";
+import { useSelector } from "react-redux";
 import Card from "../../components/merchant/Card";
 
 export default DeliveryMerchant = () => {
-  let data = [1, 2, 3, 4, 5, 2, 3, 35, 325];
+  const { delivery } = useSelector((state) => {
+    return state.merchant;
+  });
+
   return (
     <View className="flex-1 items-center ">
       <View className="h-[10%] w-full">
@@ -12,11 +16,25 @@ export default DeliveryMerchant = () => {
       </View>
       <View className="h-[1%] bg-white" />
       <View className="bg-yellow-300 w-full h-[92%] rounded-t-3xl p-4">
-        <FlatList
-          data={data}
-          renderItem={() => <Card data={data} />}
-          className="my-[3%]"
-        />
+        <View className=" rounded-lg mt-3 h-full">
+          <FlatList
+            className="mb-5"
+            key={delivery.id}
+            data={delivery}
+            renderItem={({ item }) => (
+              <Card
+                nama="delivery"
+                id={item.id}
+                warna={item.colorVariant}
+                lembar={item.totalPages}
+                jilid={item.isJilid}
+                harga={item.totalPrice}
+                alamat={item.address}
+                status={item.status}
+              />
+            )}
+          />
+        </View>
       </View>
     </View>
   );

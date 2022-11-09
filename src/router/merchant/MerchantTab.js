@@ -13,6 +13,8 @@ const Tab = createMaterialBottomTabNavigator();
 export default MerchantTab = () => {
   return (
     <Tab.Navigator
+      sceneAnimationEnabled={true}
+      shifting={true}
       initialRouteName="HomeMerchant"
       barStyle={{
         borderTopRightRadius: 14,
