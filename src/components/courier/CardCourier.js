@@ -1,6 +1,14 @@
 import { Text, TouchableOpacity, View } from "react-native";
 
-export default CardCourier = () => {
+export default CardCourier = ({
+  id,
+  lembar,
+  warna,
+  jilid,
+  harga,
+  alamat,
+  status,
+}) => {
   return (
     <>
       <View className="items-center mb-2">

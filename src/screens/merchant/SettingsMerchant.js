@@ -1,6 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
 import {
-  Button,
   FlatList,
   Modal,
   Text,
@@ -47,6 +47,11 @@ export default SettingMerchant = ({ navigation }) => {
     console.log(price);
   };
 
+  const logout = async () => {
+    await AsyncStorage.clear();
+    navigation.navigate("LoginScreen");
+  };
+
   return (
     <>
       <View className="flex-1 items-center ">
@@ -78,7 +83,7 @@ export default SettingMerchant = ({ navigation }) => {
                 <Text>Ubah Harga</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => navigation.navigate("LoginScreen")}
+                onPress={() => logout()}
                 className="bg-yellow-200 h-[5%] justify-center items-center w-full mb-[3%]"
               >
                 <Text>Keluar</Text>

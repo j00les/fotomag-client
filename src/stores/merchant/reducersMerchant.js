@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL = "https://84c7-36-78-13-68.ap.ngrok.io";
+const URL = "https://e07d-36-78-13-68.ap.ngrok.io";
 
 // ============================================== Fetch =============================================
 
@@ -16,6 +16,7 @@ export const getListTrxCus = createAsyncThunk("getListTrxCus", async () => {
         },
       }
     );
+    console.log(data, "reducs");
     return data;
   } catch (error) {
     console.log(error);
@@ -124,6 +125,7 @@ const merchantSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getListTrxCus.fulfilled, (state, action) => {
+      console.log(action);
       let data = action.payload;
       state.pending = data.filter((e) => e.status === "Pending");
       state.progress = data.filter((e) => e.status === "Progress");
@@ -138,5 +140,4 @@ const merchantSlice = createSlice({
 });
 
 export const { actions, reducer } = merchantSlice;
-export const { changeName } = actions;
 export default reducer;

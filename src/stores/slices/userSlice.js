@@ -15,13 +15,15 @@ export const userSlice = createSlice({
     },
 
     getTransactionData: (state, payload) => {
-      // console.log(payload);
       state.transactionData = payload.payload;
     },
   },
 });
 
-export const { updateTransactionToPending, getAccessToken, getTransactionData } = userSlice.actions;
-// export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const {
+  updateTransactionToPending,
+  getAccessToken,
+  getTransactionData,
+} = userSlice.actions;
 
 export default userSlice.reducer;
