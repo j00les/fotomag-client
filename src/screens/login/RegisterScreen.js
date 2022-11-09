@@ -33,8 +33,6 @@ export default RegisterScreen = () => {
       <View className="w-full items-center h-[75%] ">
         <FormCom role={role} />
       </View>
-
-      <RegisterMap />
     </View>
   );
 };

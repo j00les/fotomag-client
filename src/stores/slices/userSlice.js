@@ -7,6 +7,8 @@ export const userSlice = createSlice({
     //update abis bikin order
     // transactionToPending: false,
     transactionData: null,
+    //merchant register
+    selectedLongLat: "",
   },
 
   reducers: {
@@ -22,11 +24,21 @@ export const userSlice = createSlice({
     logout: state => {
       state.access_token = "";
     },
+
+    getLongLatForRegister: (state, payload) => {
+      const { payload: longlat } = payload;
+      state.selectedLongLat = longlat;
+    },
   },
 });
 
-export const { updateTransactionToPending, getAccessToken, getTransactionData, logout } =
-  userSlice.actions;
+export const {
+  getLongLatForRegister,
+  updateTransactionToPending,
+  getAccessToken,
+  getTransactionData,
+  logout,
+} = userSlice.actions;
 // export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
 export default userSlice.reducer;

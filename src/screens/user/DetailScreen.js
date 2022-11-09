@@ -1,27 +1,27 @@
-import * as DocumentPicker from 'expo-document-picker';
-import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
-import { Modal, TouchableOpacity, Text, View, Pressable, TextInput } from 'react-native';
-import { RadioButton } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
-import Button from '../../components/user/Button';
-import { Feather } from '@expo/vector-icons';
+import * as DocumentPicker from "expo-document-picker";
+import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+import { Modal, TouchableOpacity, Text, View, Pressable, TextInput } from "react-native";
+import { RadioButton } from "react-native-paper";
+import { useDispatch } from "react-redux";
+import Button from "../../components/user/Button";
+import { Feather } from "@expo/vector-icons";
 
-import { styles } from '../../styles/style';
+import { styles } from "../../styles/style";
 
 export default function DetailScreen({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [jilid, setJilid] = useState('unchecked');
-  const [color, setColor] = useState('unchecked');
-  const [black, setBlack] = useState('unchecked');
+  const [jilid, setJilid] = useState("unchecked");
+  const [color, setColor] = useState("unchecked");
+  const [black, setBlack] = useState("unchecked");
   const [orderInput, setOrderInput] = useState({
-    colorVariant: '',
-    isJilid: 'NO',
+    colorVariant: "",
+    isJilid: "NO",
     duplicate: 0,
     fileUrl: {
-      name: '',
-      uri: '',
-      type: '',
+      name: "",
+      uri: "",
+      type: "",
     },
     atkId: route.params.id,
   });
@@ -31,7 +31,6 @@ export default function DetailScreen({ route }) {
   async function retrievePdf() {
     try {
       const file = await DocumentPicker.getDocumentAsync();
-      console.log(file, 'filleeeeee retrievepddff');
       setOrderInput({
         ...orderInput,
         fileUrl: {
@@ -46,24 +45,24 @@ export default function DetailScreen({ route }) {
   }
 
   function changeColor(v) {
-    if (v === 'Berwarna') {
-      setColor('checked');
-      setBlack('unchecked');
-      setOrderInput({ ...orderInput, colorVariant: 'Berwarna' });
+    if (v === "Berwarna") {
+      setColor("checked");
+      setBlack("unchecked");
+      setOrderInput({ ...orderInput, colorVariant: "Berwarna" });
     } else {
-      setBlack('checked');
-      setColor('unchecked');
-      setOrderInput({ ...orderInput, colorVariant: 'Hitamputih' });
+      setBlack("checked");
+      setColor("unchecked");
+      setOrderInput({ ...orderInput, colorVariant: "Hitamputih" });
     }
   }
 
   function changeJilid() {
-    if (orderInput.isJilid === 'YES') {
-      setJilid('unchecked');
-      setOrderInput({ ...orderInput, isJilid: 'NO' });
+    if (orderInput.isJilid === "YES") {
+      setJilid("unchecked");
+      setOrderInput({ ...orderInput, isJilid: "NO" });
     } else {
-      setJilid('checked');
-      setOrderInput({ ...orderInput, isJilid: 'YES' });
+      setJilid("checked");
+      setOrderInput({ ...orderInput, isJilid: "YES" });
     }
   }
 
@@ -116,7 +115,7 @@ export default function DetailScreen({ route }) {
                   <RadioButton
                     color="#003b4f"
                     status={color}
-                    onPress={() => changeColor('Berwarna')}
+                    onPress={() => changeColor("Berwarna")}
                   />
                 </View>
 
@@ -126,7 +125,7 @@ export default function DetailScreen({ route }) {
                   <RadioButton
                     color="#003b4f"
                     status={black}
-                    onPress={() => changeColor('Hitamputih')}
+                    onPress={() => changeColor("Hitamputih")}
                   />
                 </View>
 
@@ -151,7 +150,7 @@ export default function DetailScreen({ route }) {
                 className="border mr-[180px]  bg-primary  rounded-md py-2 px-1 "
                 onPress={() => {
                   setModalVisible(false);
-                  navigation.navigate('map-order', { orderData: orderInput });
+                  navigation.navigate("map-order", { orderData: orderInput });
                 }}
               >
                 <Text className="text-center text-white uppercase">antar ke </Text>

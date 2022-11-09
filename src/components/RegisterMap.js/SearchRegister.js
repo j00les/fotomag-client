@@ -1,13 +1,15 @@
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+// import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
-const SearchMap = ({ handleCoordinate, region }) => {
+const SearchRegister = ({ handleCoordinate, region }) => {
   return (
     <GooglePlacesAutocomplete
       placeholder="Search"
       fetchDetails={true}
       onPress={(data, details = null) => {
         // 'details' is provided when fetchDetails = true
-        console.log(details);
+        console.log(data);
+        // console.log(details, "muncul sih");
         const { lat: latitude } = details.geometry.location;
         const { lng: longitude } = details.geometry.location;
 
@@ -24,4 +26,4 @@ const SearchMap = ({ handleCoordinate, region }) => {
   );
 };
 
-export default SearchMap;
+export default SearchRegister;
