@@ -3,7 +3,6 @@ import LottieView from "lottie-react-native";
 import { useState } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
 import { baseURL } from "../../constants/constants";
 
 export default LoginScreen = ({ navigation }) => {

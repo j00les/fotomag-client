@@ -1,27 +1,18 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  Image,
-  FlatList,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 
 export default function ProfileScreen() {
   return (
     <View style={styles.container}>
-      <View style={styles.image}>
+      <View className="border w-[500] h-[500]">
         <Image
-          style={styles.imageProfile}
+          className="w-full h-full"
           source={{
             uri: "https://media.istockphoto.com/photos/beautiful-afro-woman-picture-id1391365592?b=1&k=20&m=1391365592&s=170667a&w=0&h=ZuQbskdodhMKCFfTaoJ9b0TJP7bYLJ_UddadoQQp0Xo=",
           }}
         />
       </View>
 
-      <View style={styles.body}>
+      <View>
         <Text style={styles.nameProfile}>Alex Chandra Hanif</Text>
         <View
           style={{
@@ -45,12 +36,8 @@ export default function ProfileScreen() {
               borderRadius: 20,
             }}
           >
-            <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-              Total Saldo
-            </Text>
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-              Rp.1000.0000
-            </Text>
+            <Text style={{ fontSize: 15, fontWeight: "bold" }}>Total Saldo</Text>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>Rp.1000.0000</Text>
           </View>
         </View>
       </View>
@@ -78,12 +65,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 15,
   },
-  body: {
-    flex: 5,
-    backgroundColor: "#F8EDE3",
-    borderTopEndRadius: 30,
-    borderTopLeftRadius: 30,
-  },
+  // body: {
+  //   flex: 5,
+  //   backgroundColor: "#F8EDE3",
+  //   borderTopEndRadius: 30,
+  //   borderTopLeftRadius: 30,
+  // },
   textBody: {
     fontSize: 15,
   },

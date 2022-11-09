@@ -8,7 +8,7 @@ import { StatusBar } from "react-native";
 import { Stack } from ".";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+// import { useState } from "react";
 import { getToken } from "../stores/actions/userAction";
 // import { getAccessToken } from '../stores/slices/userSlice';
 
@@ -20,7 +20,8 @@ export default function MainStack() {
   const getData = async key => {
     try {
       const keyz = await AsyncStorage.getItem(key);
-      return keyz;
+      const token = JSON.parse(keyz);
+      return token;
     } catch (e) {
       console.log(e);
     }
@@ -54,7 +55,7 @@ export default function MainStack() {
   return (
     <NavigationContainer>
       <StatusBar />
-      <Stack.Navigator initialRouteName="RegisterScreen">
+      <Stack.Navigator>
         <Stack.Screen
           options={{
             tabBarLabel: "Home",
@@ -73,15 +74,11 @@ export default function MainStack() {
           component={RegisterScreen}
         />
 
-        {/* <Stack.Screen
-          name="MerchantTab"
-          component={MerchantTab}
-          options={{ headerShown: false }}
-        /> */}
+        <Stack.Screen name="MerchantTab" component={MerchantTab} options={{ headerShown: false }} />
+        {/* Stack.Screen name="UserTab" component={UserStack}   options={{ headerShown: false }} */}
+        {/* /> */}
 
         <Stack.Screen name="UserTab" component={UserStack} options={{ headerShown: false }} />
-
-        {/* <Stack.Screen name="UserTab" component={UserStack} options={{ headerShown: false }} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
