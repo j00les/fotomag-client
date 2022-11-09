@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -7,12 +8,7 @@ import { baseURL } from "../../constants/constants";
 import RegisterMap from "./RegisterMap";
 
 export default FormCom = props => {
-  const [userinput, setUserInput] = useState({
-    email: "",
-    password: "",
-    alamat: "",
-  });
-
+  // merchant/user input
   const [merchantInput, setMerchantInput] = useState({
     name: "",
     email: "",
@@ -26,9 +22,8 @@ export default FormCom = props => {
     longitude: "",
     latitude: "",
   });
-
+  const navigation = useNavigation();
   const { user } = useSelector(state => state);
-  console.log(merchantInput);
 
   useEffect(() => {
     setMerchantInput({ ...merchantInput, latitude: user.selectedLongLat.latitude });
@@ -37,25 +32,39 @@ export default FormCom = props => {
 
   const registerHandler = async () => {
     try {
-      const { data } = await axios({
-        url: `${baseURL}/merchant/register`,
-        method: "post",
-        data: {
-          name: merchantInput.name,
-          email: merchantInput.email,
-          password: merchantInput.password,
-          address: merchantInput.address,
-          atkName: merchantInput.atkName,
-          atkAddress: merchantInput.atkAddress,
-          priceColor: merchantInput.priceColor,
-          priceBlack: merchantInput.priceBlack,
-          priceJilid: merchantInput.priceJilid,
-          longitude: merchantInput.longitude,
-          latitude: merchantInput.latitude,
-          // ...merchantInput,
-        },
-      });
-      console.log(data);
+      if (props.role === "merchant") {
+        const { data } = await axios({
+          url: `${baseURL}/merchant/register`,
+          method: "post",
+          data: {
+            name: merchantInput.name,
+            email: merchantInput.email,
+            password: merchantInput.password,
+            address: merchantInput.address,
+            atkName: merchantInput.atkName,
+            atkAddress: merchantInput.atkAddress,
+            priceColor: merchantInput.priceColor,
+            priceBlack: merchantInput.priceBlack,
+            priceJilid: merchantInput.priceJilid,
+            longitude: merchantInput.longitude,
+            latitude: merchantInput.latitude,
+            // ...merchantInput,
+          },
+        });
+        // console.log(data);
+      } else if (props.role === "user") {
+        const { data } = await axios({
+          url: `${baseURL}/customer/register`,
+          method: "post",
+          data: {
+            name: merchantInput.name,
+            email: merchantInput.email,
+            password: merchantInput.password,
+            address: merchantInput.address,
+          },
+        });
+        navigation.navigate("LoginScreen");
+      }
     } catch (err) {
       console.log(err);
     }
