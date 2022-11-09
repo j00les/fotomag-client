@@ -1,95 +1,20 @@
-import { AntDesign } from '@expo/vector-icons';
-import { useEffect, useRef, useState } from 'react';
-import MapViewDirections from 'react-native-maps-directions';
-import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Button } from 'react-native';
-import { styles } from '../../styles/style';
+import { AntDesign } from "@expo/vector-icons";
+import { useEffect, useRef, useState } from "react";
+import MapViewDirections from "react-native-maps-directions";
+import MapView, { Marker, Callout, PROVIDER_GOOGLE } from "react-native-maps";
+import { View, Dimensions, Button } from "react-native";
+import { styles } from "../../styles/style";
 const latitude = -6.1753871;
 const longitude = 106.8249641;
 const latitudeDelta = 0.0922;
-//monas 1 gambir
 
-// "latitude": -6.1753871, "longitude": 106.8249641
-//hacktiv
-// "latitude": -6.1753871, "longitude": 106.8249641
-// const origin = {
-//   latitude: -6.1753871,
-//   longitude: 106.8249641,
-// };
-// const destination = {
-//   latitude: -6.260826,
-//   longitude: 106.7815368,
-// };
+import { io } from "socket.io-client";
 
-import { io } from 'socket.io-client';
-// import Maps from "./screens/tesmap";
+import * as Location from "expo-location";
 
-import * as Location from 'expo-location';
+const socket = io("https://58ba-139-228-111-125.ap.ngrok.io");
 
-const socket = io('https://59de-139-228-111-125.ap.ngrok.io');
-
-// export default function App() {
-//   const [location, setLocation] = useState("tot");
-//   const [errorMsg, setErrorMsg] = useState(null);
-//   const [loc, setLoc] = useState("");
-//   const [paket, setPaket] = useState(null);
-//   const [state, setState] = useState({
-//     pickupCords: {
-//       latitude: -6.2,
-//       longitude: 106.816666,
-//     },
-//   });
-
-//   const get = async () => {
-//     let { status } = await Location.requestForegroundPermissionsAsync();
-//     if (status !== "granted") {
-//       setErrorMsg("Permission to access location was denied");
-//       return;
-//     }
-//     let data = await Location.getCurrentPositionAsync({});
-//     console.log(location, "ini location di client");
-//     setLocation(data);
-//     socket.emit("updateLocation", location);
-//   };
-//   let trx = "1234";
-
-//   const nyoba = () => {
-//     socket.emit("loc", trx, "lols");
-//   };
-
-// useEffect(() => {
-//   console.log("masuk di app");
-//   socket.emit("join-room", "asyncstorage-userId");
-//   socket.on("sendLocation", (location) => {
-// listener dirubah location kurir
-// })
-// let interval;
-// if (paket.status === "delivery") {
-//   interval = setInterval(() => {
-//     get();
-//   }, 1000);
-// } else {
-//   clearInterval(interval);
-// }
-// get().then();
-
-// socketcls.on("connect", (socket) => {
-//   console.log(socket);
-//   console.log("masuk client", socket.id); // x8WIv7-mJelg7on_ALbx
-// });
-
-// socket.on("updateLocation", (location) => {
-//   console.log(location, "<<<<<<<");
-// });
-
-// socket.on("disconnect", (socket) => {
-//   console.log("disconnect client", socket.id); // undefined
-// });
-// }, [paket]);
-
-// }
-
-const screen = Dimensions.get('window');
+const screen = Dimensions.get("window");
 const longitudeDelta = latitudeDelta * (screen.width / screen.height);
 
 const coordinates = [
@@ -102,21 +27,27 @@ const coordinates = [
   // cust
   { latitude: -6.1664879725006605, longitude: 106.8232461065054 },
 ];
-const GOOGLE_MAPS_APIKEY = 'AIzaSyAkNQFV5IHPqRcPUwy2eibkgMyYjy0Et20';
+const GOOGLE_MAPS_APIKEY = "AIzaSyAkNQFV5IHPqRcPUwy2eibkgMyYjy0Et20";
 
 export default function MapTracking({ route, reference }) {
   const [paket, setPaket] = useState(null);
-  const [location, setLocation] = useState('tot');
+  const [location, setLocation] = useState("O");
+  const [trackingInterval, setTrackingInterval] = useState(null);
 
   const get = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      setErrorMsg('Permission to access location was denied');
+    if (status !== "granted") {
+      // setErrorMsg("Permission to access location was denied");
       return;
     }
     let data = await Location.getCurrentPositionAsync({});
-    console.log(location, 'ini location di client');
+    console.log(data, "ini location di client");
     setLocation(data);
+// merchant
+
+    return data;
+  };
+// slove entar
     socket.emit('updateLocation', location);
   };
   let go = true;
@@ -131,46 +62,28 @@ export default function MapTracking({ route, reference }) {
     // get().then(() => {
     //   console.log('izin dapet');
     // });
+// development
 
+  useEffect(() => {
+    get();
     // socket.emit('join-room', 'asyncstorage-userId');
     // socket.on('sendLocation', location => {
     // listener dirubah location kurir
     // });
-    if (paket === 'delivery') {
-      intervalID = setInterval(() => {
-        let data = Location.getCurrentPositionAsync({}).then(res => {
-          setLocation(res);
-        });
-        console.log(location, 'ini location di client');
-        setLocation(data);
-        get();
-        console.log(paket);
-        socket.emit('nyoba', 'location');
+    if (paket === "delivery") {
+      const intervalID = setInterval(() => {
+        get().then((newLoc) => socket.emit("updateLocation", newLoc));
       }, 1000);
+      setTrackingInterval(intervalID);
     } else {
-      clearInterval(intervalID);
+      clearInterval(trackingInterval);
     }
-
-    // if (paket === 'delivery') {
-    //   intervalID = setInterval(() => {
-    //     let data = Location.getCurrentPositionAsync({}).then(res => {
-    //       setLocation(res);
-    //     });
-    //     console.log(location, 'ini location di client');
-    //     setLocation(data);
-    //     get();
-    //     console.log(paket);
-    //     socket.emit('nyoba', 'location');
-    //   }, 1000);
-    //   return;
-    // } else {
-    //   return () => clearInterval(intervalID);
-    // }
   }, [paket]);
 
-  let trx = '1234';
+  let trx = "1234";
   const nyoba = () => {
-    socket.emit('loc', trx, 'lols');
+    socket.emit("loc", trx, "lols");
+    console.log("lol");
   };
 
   return (
@@ -194,12 +107,12 @@ export default function MapTracking({ route, reference }) {
           destination={coordinates[1]}
           apikey={GOOGLE_MAPS_APIKEY}
           strokeWidth={5}
-          strokeColor={'hotpink'}
+          strokeColor={"hotpink"}
         />
       </MapView>
-      <Button title="go" onPress={() => setPaket('delivery')} />
-      <Button title="go go" onPress={() => setPaket('Bukan Dedamsd')} />
-      <Button title="end" onPress={() => end()} />
+      <Button title="go" onPress={() => setPaket("delivery")} />
+      <Button title="end" onPress={() => setPaket("Bukan Dedamsd")} />
+      {/* <Button title="end" onPress={() => end()} /> */}
 
       <Button title="nyoba" onPress={() => nyoba()} />
     </View>

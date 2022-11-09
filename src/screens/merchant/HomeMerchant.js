@@ -1,26 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "../../components/merchant/Card";
+import { getListTrxCus } from "../../stores/merchant/reducersMerchant";
 
 export default HomeMerchant = () => {
-  let data = [1, 2, 3, 4, 5, 2, 3, 35, 325];
   const [refresh, setRefresh] = useState(false);
+  const dispatch = useDispatch();
+  const { pending } = useSelector((state) => {
+    return state.merchant;
+  });
+
+  useEffect(() => {
+    dispatch(getListTrxCus());
+  }, []);
+
   return (
     <View className="flex-1 items-center ">
       <View className="h-[16%] w-full bg-red-300 rounded-b-3xl ">
-        <View className="flex-row h-[50%] items-center justify-between mt-[3%] px-[4%]">
+        <View className="flex-row h-[50%] items-center justify-center mt-[3%] px-[4%]">
           <View className="">
-            <Text>Selamat datang, Your Name</Text>
-          </View>
-          <View className="w-[17%] h-full border-2 rounded-full ">
-            <TouchableOpacity className="w-full h-full p-2">
-              <Image
-                source={{
-                  uri: "https://img.icons8.com/ios-filled/512/guest-male.png",
-                }}
-                className="w-[100%] h-[100%] "
-              />
-            </TouchableOpacity>
+            <Text className="text-2xl font-bold">
+              Selamat datang, Your Name
+            </Text>
           </View>
         </View>
       </View>
@@ -34,8 +36,20 @@ export default HomeMerchant = () => {
           <View className="bg-yellow-200 h-[78%] rounded-t-3xl">
             <View className="p-4 mt-3 h-full">
               <FlatList
-                data={data}
-                renderItem={({ data }) => <Card data={data} />}
+                key={pending.id}
+                data={pending}
+                renderItem={({ item }) => (
+                  <Card
+                    nama="home"
+                    id={item.id}
+                    warna={item.colorVariant}
+                    lembar={item.totalPages}
+                    jilid={item.isJilid}
+                    harga={item.totalPrice}
+                    alamat={item.address}
+                    status={item.status}
+                  />
+                )}
                 refreshing={refresh}
                 onRefresh={() => {
                   setRefresh(true),
