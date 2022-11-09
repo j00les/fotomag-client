@@ -1,22 +1,22 @@
-import { Avatar } from '@rneui/themed';
-import { FlatList, View, Text, TouchableOpacity } from 'react-native';
-import { data as terdekat } from '../../../server-dummy/dummy';
-import HomeCard from '../../components/user/HomeCard';
-import { CustomText, styles } from '../../styles/style';
-import { LinearGradient } from 'expo-linear-gradient';
-import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import * as Location from 'expo-location';
-import axios from 'axios';
-import SearchMap from '../../components/user/SearchMap';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getToken } from '../../stores/actions/userAction';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Avatar } from "@rneui/themed";
+import { FlatList, View, Text, TouchableOpacity } from "react-native";
+import { data as terdekat } from "../../../server-dummy/dummy";
+import HomeCard from "../../components/user/HomeCard";
+import { CustomText, styles } from "../../styles/style";
+import { LinearGradient } from "expo-linear-gradient";
+import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import * as Location from "expo-location";
+import axios from "axios";
+import SearchMap from "../../components/user/SearchMap";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getToken } from "../../stores/actions/userAction";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function HomeScreen() {
   //konteks: response midtrans buat di oper ke payment screen
-  const [_, setResponse] = useState('');
+  const [_, setResponse] = useState("");
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const dispatch = useDispatch();
@@ -43,14 +43,13 @@ export default function HomeScreen() {
     // console.log('jalan ga sih');
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
         return;
       }
       // console.log(status, 'log -status');
 
       let location = await Location.getCurrentPositionAsync({});
-      // console.log(location, 'location- loggz');
       setLocation(location);
     })();
 
@@ -61,8 +60,7 @@ export default function HomeScreen() {
   }, []);
 
   // console.log(token);
-
-  // console.log(location);
+  console.log(location, "lognyah baru");
   // console.log(location);
   // let text = 'Waiting..';
   // if (errorMsg) {
@@ -74,12 +72,12 @@ export default function HomeScreen() {
   async function acquireToken() {
     try {
       const { data } = await axios({
-        method: 'post',
-        url: 'https://6445-202-80-217-184.ap.ngrok.io/pay',
+        method: "post",
+        url: "https://6445-202-80-217-184.ap.ngrok.io/pay",
       });
 
       setResponse(data);
-      navigation.navigate('payment', data);
+      navigation.navigate("payment", data);
     } catch (err) {
       console.log(err);
     }
@@ -97,7 +95,7 @@ export default function HomeScreen() {
           <Avatar
             size={60}
             rounded
-            source={{ uri: 'https://randomuser.me/api/portraits/men/45.jpg' }}
+            source={{ uri: "https://randomuser.me/api/portraits/men/45.jpg" }}
           />
         </View>
       </View>
@@ -106,7 +104,7 @@ export default function HomeScreen() {
         <View id="balance-container" className=" h-[35%] rounded-lg pb-5">
           <LinearGradient
             className="rounded-lg h-[100%]"
-            colors={['#001627', '#003b4f', '#38657b']}
+            colors={["#001627", "#003b4f", "#38657b"]}
             style={styles.button}
           >
             <View className="items-center mt-4">

@@ -31,7 +31,7 @@ export default function DetailScreen({ route }) {
   async function retrievePdf() {
     try {
       const file = await DocumentPicker.getDocumentAsync();
-      // console.log(file);
+      console.log(file, 'filleeeeee retrievepddff');
       setOrderInput({
         ...orderInput,
         fileUrl: {

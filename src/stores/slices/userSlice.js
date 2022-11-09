@@ -1,11 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: {
-    access_token: '',
+    access_token: "",
     //update abis bikin order
-    transactionToPending: false,
+    // transactionToPending: false,
+    transactionData: null,
   },
 
   reducers: {
@@ -13,13 +14,14 @@ export const userSlice = createSlice({
       state.access_token = payload.payload;
     },
 
-    updateTransactionToPending: (state, payload) => {
-      state.transactionToPending = payload.payload;
+    getTransactionData: (state, payload) => {
+      // console.log(payload);
+      state.transactionData = payload.payload;
     },
   },
 });
 
-export const { updateTransactionToPending, getAccessToken } = userSlice.actions;
+export const { updateTransactionToPending, getAccessToken, getTransactionData } = userSlice.actions;
 // export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
 export default userSlice.reducer;
