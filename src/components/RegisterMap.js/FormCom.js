@@ -18,6 +18,7 @@ export default FormCom = props => {
     email: "",
     password: "",
     address: "",
+    atkAddress: "",
     atkName: "",
     priceColor: 0,
     priceBlack: 0,
@@ -45,6 +46,7 @@ export default FormCom = props => {
           password: merchantInput.password,
           address: merchantInput.address,
           atkName: merchantInput.atkName,
+          atkAddress: merchantInput.atkAddress,
           priceColor: merchantInput.priceColor,
           priceBlack: merchantInput.priceBlack,
           priceJilid: merchantInput.priceJilid,
@@ -77,15 +79,15 @@ export default FormCom = props => {
         <TextInput
           placeholder="Kata Sandi"
           secureTextEntry
-          className="border-2 mb-2 rounded-lg  px-4 py-1 w-[75%]"
+          className="border-2 rounded-lg  px-4 py-1 w-[75%]"
           onChangeText={text => setMerchantInput({ ...merchantInput, password: text })}
         />
 
-        {/* <TextInput
+        <TextInput
           placeholder="Alamat"
           className="border-2 rounded-lg px-4 py-1 w-[75%] mb-2"
           onChangeText={text => setMerchantInput({ ...merchantInput, address: text })}
-        /> */}
+        />
 
         {props.role === "merchant" && (
           <>
@@ -100,7 +102,7 @@ export default FormCom = props => {
                 <TextInput
                   placeholder="Alamat Toko"
                   className="border-2 px-4 rounded-lg h-10 w-[74%] items-center"
-                  onChangeText={text => setMerchantInput({ ...merchantInput, address: text })}
+                  onChangeText={text => setMerchantInput({ ...merchantInput, atkAddress: text })}
                 />
                 <RegisterMap />
               </View>
@@ -108,6 +110,13 @@ export default FormCom = props => {
               <TextInput
                 onChangeText={text => setMerchantInput({ ...merchantInput, priceBlack: text })}
                 placeholder="Harga Print"
+                keyboardType="number-pad"
+                className="border-2 rounded-lg px-4 py-1 w-[75%]"
+              />
+
+              <TextInput
+                onChangeText={text => setMerchantInput({ ...merchantInput, atkAddress: text })}
+                placeholder="Atk address"
                 keyboardType="number-pad"
                 className="border-2 rounded-lg px-4 py-1 w-[75%]"
               />
