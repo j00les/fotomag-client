@@ -120,7 +120,6 @@ export default function MapTracking({ route, reference }) {
     socket.emit('updateLocation', location);
   };
   let go = true;
-  let intervalID;
   const end = () => {
     clearInterval(intervalID),
       console.log('masuk end'),
@@ -128,6 +127,7 @@ export default function MapTracking({ route, reference }) {
       console.log(paket);
   };
   useEffect(() => {
+    let intervalID;
     // get().then(() => {
     //   console.log('izin dapet');
     // });

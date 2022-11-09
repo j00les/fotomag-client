@@ -1,21 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: {
-    value: 0,
+    access_token: "",
+    //update abis bikin order
+    // transactionToPending: false,
+    transactionData: null,
   },
+
   reducers: {
-    increment: state => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
+    getAccessToken: (state, payload) => {
+      state.access_token = payload.payload;
+    },
+
+    getTransactionData: (state, payload) => {
+      // console.log(payload);
+      state.transactionData = payload.payload;
     },
   },
 });
 
+export const { updateTransactionToPending, getAccessToken, getTransactionData } = userSlice.actions;
 // export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
 export default userSlice.reducer;

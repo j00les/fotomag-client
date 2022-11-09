@@ -16,13 +16,14 @@ export default function DetailScreen({ route }) {
   const [black, setBlack] = useState('unchecked');
   const [orderInput, setOrderInput] = useState({
     colorVariant: '',
-    isJilid: '',
+    isJilid: 'NO',
     duplicate: 0,
     fileUrl: {
       name: '',
       uri: '',
       type: '',
     },
+    atkId: route.params.id,
   });
 
   const navigation = useNavigation();
@@ -30,7 +31,7 @@ export default function DetailScreen({ route }) {
   async function retrievePdf() {
     try {
       const file = await DocumentPicker.getDocumentAsync();
-      // console.log(file);
+      console.log(file, 'filleeeeee retrievepddff');
       setOrderInput({
         ...orderInput,
         fileUrl: {
