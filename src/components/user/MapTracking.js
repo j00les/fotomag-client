@@ -49,7 +49,7 @@ export default function MapTracking({ route, reference }) {
   };
   // slove entar
   socket.emit("updateLocation", location);
-  // };
+  // }
   let go = true;
   const end = () => {
     clearInterval(intervalID),
@@ -72,7 +72,7 @@ export default function MapTracking({ route, reference }) {
     // });
     if (paket === "delivery") {
       const intervalID = setInterval(() => {
-        get().then((newLoc) => socket.emit("updateLocation", newLoc));
+        get().then(newLoc => socket.emit("updateLocation", newLoc));
       }, 1000);
       setTrackingInterval(intervalID);
     } else {
