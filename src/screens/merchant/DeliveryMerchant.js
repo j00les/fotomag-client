@@ -1,9 +1,9 @@
 import { Button, FlatList, Text, View } from "react-native";
 import { useSelector } from "react-redux";
-import Card from "../../components/merchant/Card";
+import Card from "../../components/RegisterMap.js/Card";
 
 export default DeliveryMerchant = () => {
-  const { delivery } = useSelector((state) => {
+  const { delivery } = useSelector(state => {
     return state.merchant;
   });
 

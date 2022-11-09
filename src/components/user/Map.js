@@ -6,13 +6,13 @@ import { styles } from "../../styles/style";
 import SearchMap from "./SearchMap";
 import axios from "axios";
 import Button from "./Button";
-const latitude = -6.1753871;
-const longitude = 106.8249641;
-const latitudeDelta = 0.0922;
-const screen = Dimensions.get("window");
-const longitudeDelta = latitudeDelta * (screen.width / screen.height);
+import { latitude, latitudeDelta, longitude, longitudeDelta } from "../../constants/constants";
+// const latitude = -6.1753871;
+// const longitude = 106.8249641;
+// const latitudeDelta = 0.0922;
+// const screen = Dimensions.get("window");
+// const longitudeDelta = latitudeDelta * (screen.width / screen.height);
 
-// const longitudeDelta = latitudeDelta / (screen.width / screen.height);
 export default function MapOrder({ route, reference }) {
   const mapRef = useRef();
   const order = route?.params?.orderData;

@@ -1,30 +1,24 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import LottieView from 'lottie-react-native';
-import { useState } from 'react';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import LottieView from "lottie-react-native";
+import { useState } from "react";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
+import { baseURL } from "../../constants/constants";
 
-const baseURL = ' https://f2d5-139-228-111-125.ap.ngrok.io';
 export default LoginScreen = ({ navigation }) => {
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState("");
   const [cred, setCred] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
-  const getData = async key => {
-    try {
-      const keyz = await AsyncStorage.getItem(key);
-      console.log(keyz);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const navigation = useNavigation();
 
   const storeData = async value => {
     try {
       const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem('@access_token', jsonValue);
+      await AsyncStorage.setItem("@access_token", jsonValue);
     } catch (e) {
       consol.log(e);
     }
@@ -34,27 +28,21 @@ export default LoginScreen = ({ navigation }) => {
     try {
       const { data } = await axios({
         url: `${baseURL}/login`,
-        method: 'post',
+        method: "post",
         data: {
           email: cred.email,
           password: cred.password,
         },
       });
-      console.log(data);
 
-      // taruh redux
-      //set-item
       storeData(data.access_token);
-      // set//nama-user
-      //  set // role
-      // set//islogin
 
-      if (data.role === 'Customer') {
-        navigation.navigate('UserTab');
-      } else if (data.role === 'Merchant') {
-        navigation.navigate('MerchantTab');
-      } else if (data.role === 'Courier') {
-        navigation.navigate('MerchantTab');
+      if (data.role === "Customer") {
+        navigation.navigate("UserTab");
+      } else if (data.role === "Merchant") {
+        navigation.navigate("MerchantTab");
+      } else if (data.role === "Courier") {
+        navigation.navigate("MerchantTab");
       }
     } catch (err) {
       console.log(err);
@@ -64,15 +52,25 @@ export default LoginScreen = ({ navigation }) => {
   return (
     <View className="flex-1 items-center">
       <View className="flex-1 w-full">
-        <View className="h-[25%] w-full bg-blue-200 p-3 rounded-b-3xl">
-          <Text className="text-4xl ">Welcome Back</Text>
-          <Text className="text-xl">Login to continue</Text>
+        <View className="h-[25%] w-full px-2 rounded-b-3xl">
+          <View className="mx-auto w-[300] h-[120]  mt-10">
+            <Image
+              className="h-full w-full"
+              source={require("../../../assets/fotomag-logo-baruu.png")}
+            />
+          </View>
         </View>
-        <View className="h-[75%] w-full bg-red-300 rounded-b-2xl">
-          <LottieView source={require('../../../assets/merchanLottie/Login.json')} autoPlay loop />
+
+        <View className="h-[75%] w-full  mx-auto  rounded-b-2xl">
+          <LottieView
+            className="ml-4"
+            source={require("../../../assets/merchanLottie/Login.json")}
+            autoPlay
+            loop
+          />
         </View>
       </View>
-      <View className="flex-1 w-full rounded-t-3xl bg-blue-200 items-center">
+      <View className="flex-1 w-full rounded-t-3xl  items-center">
         <View className="gap-2 mt-2 w-[70%]">
           <View className="gap-1">
             <Text>Email</Text>
@@ -89,18 +87,21 @@ export default LoginScreen = ({ navigation }) => {
               className="border-2 rounded-lg px-2"
             />
           </View>
-          <View className="items-center">
+
+          <View className="items-center pt-3">
             <TouchableOpacity
               onPress={() => loginHandler()}
-              className="border-2 rounded-xl w-[50%] h-9 bg-blue-400 justify-center"
+              className="rounded-lg w-[50%] h-9 bg-primary justify-center"
             >
-              <Text className="text-center">Login</Text>
+              <Text className="text-center text-white">Masuk</Text>
             </TouchableOpacity>
           </View>
-          <View className="items-center flex-row gap-1">
-            <Text>Don't Have Account?</Text>
-            <TouchableOpacity>
-              <Text className="text-red-400">Create Account</Text>
+
+          <View className="items-center text-center flex-row  justify-center pt-3 gap-1">
+            <Text className="text-center">Belum memiliki akun?</Text>
+
+            <TouchableOpacity onPress={() => navigation.navigate("RegisterScreen")}>
+              <Text className="text-red-400">Buat sekarang</Text>
             </TouchableOpacity>
           </View>
         </View>

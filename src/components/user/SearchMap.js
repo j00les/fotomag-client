@@ -1,4 +1,4 @@
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 const SearchMap = ({ handleCoordinate, region }) => {
   return (
@@ -11,14 +11,13 @@ const SearchMap = ({ handleCoordinate, region }) => {
         const { lng: longitude } = details.geometry.location;
 
         handleCoordinate({ latitude, longitude });
-        // setRegion({ ...region, markers: { latitude, longitude } });
       }}
       query={{
-        key: 'AIzaSyAkNQFV5IHPqRcPUwy2eibkgMyYjy0Et20',
-        language: 'en',
+        key: "AIzaSyAkNQFV5IHPqRcPUwy2eibkgMyYjy0Et20",
+        language: "en",
       }}
       GooglePlacesDetailsQuery={{
-        fields: 'geometry',
+        fields: "geometry",
       }}
     />
   );

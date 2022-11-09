@@ -15,10 +15,13 @@ export const createOrder = order => async (dispatch, getState) => {
 
     const { address, fileUrl, colorVariant, isJilid, duplicate, location, atkId } = order;
     const removeQt = access_token.replace(/"/g, "");
+    const { latitude, longitude } = location;
 
-    // console.log(location);
+    console.log(latitude, longitude);
 
     formData.append("address", address);
+    formData.append("latitude", latitude);
+    formData.append("longitude", longitude);
     formData.append("colorVariant", colorVariant);
     formData.append("isJilid", isJilid);
     formData.append("location", JSON.stringify(location));
