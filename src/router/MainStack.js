@@ -73,7 +73,11 @@ export default function MainStack() {
           component={RegisterScreen}
         />
 
-        <Stack.Screen name="MerchantTab" component={MerchantTab} options={{ headerShown: false }} />
+        {/* <Stack.Screen
+          name="MerchantTab"
+          component={MerchantTab}
+          options={{ headerShown: false }}
+        /> */}
 
         <Stack.Screen name="UserTab" component={UserStack} options={{ headerShown: false }} />
 
