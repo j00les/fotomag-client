@@ -37,8 +37,6 @@ export default function UserTab() {
         options={{
           tabBarLabel: 'History',
           tabBarIcon: ({ color }) => <MaterialIcons name="history" size={25} color={color} />,
-
-          headerShown: true,
         }}
         name="History"
         component={HistoryScreen}
