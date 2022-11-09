@@ -1,14 +1,26 @@
-import { TouchableOpacity } from 'react-native';
-import { Text } from 'react-native';
-import axios from 'axios';
+import { TouchableOpacity } from "react-native";
+import { Text } from "react-native";
+import axios from "axios";
 // import MapOrder from './Map';
-import { createOrder } from '../../stores/actions/userAction/';
-import { useDispatch } from 'react-redux';
+import { createOrder } from "../../stores/actions/userAction/";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Button({ reference, func, order }) {
+  // console.log(location)
   const dispatch = useDispatch();
+  const { user } = useSelector(state => state);
+  // console.log(user.transactionData, "masko");
 
-  console.log(order);
+  const navigation = useNavigation();
+
+  function proceedOrder() {
+    dispatch(createOrder(order));
+    if (user.transactionData) {
+      navigation.navigate("Orders");
+    }
+  }
+  // console.log(user);
 
   // mentahan
   {
@@ -21,16 +33,16 @@ export default function Button({ reference, func, order }) {
   }
 
   //modal (pesan button)
-  if (reference === 'send-pdf') {
+  if (reference === "send-pdf") {
     return (
       <TouchableOpacity
         onPress={() => func()}
         className="border  rounded-md mx-auto w-[100%] py-2 bg-white self-end"
       >
-        <Text className="text-center uppercase">Unggah FIle</Text>
+        <Text className="text-center uppercase">Unggah dokumen</Text>
       </TouchableOpacity>
     );
-  } else if (reference === 'detail-map') {
+  } else if (reference === "detail-map") {
     return (
       <>
         <TouchableOpacity
@@ -41,10 +53,11 @@ export default function Button({ reference, func, order }) {
         </TouchableOpacity>
       </>
     );
-  } else if (reference === 'map-button') {
+  } else if (reference === "map-button") {
     return (
       <TouchableOpacity
-        onPress={() => dispatch(createOrder(order))}
+        onPress={() => proceedOrder()}
+        // onPress={() => dispatch(createOrder(order))}
         className="border rounded-md  py-2 bg-white self-end absolute bottom-2 right-4"
       >
         <Text className="text-center uppercase"> Selanjutnya</Text>

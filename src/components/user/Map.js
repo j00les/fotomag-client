@@ -1,25 +1,23 @@
-import { AntDesign } from '@expo/vector-icons';
-import { useEffect, useRef, useState } from 'react';
-import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
-import { styles } from '../../styles/style';
-import SearchMap from './SearchMap';
-import axios from 'axios';
-import Button from './Button';
+import { AntDesign } from "@expo/vector-icons";
+import { useEffect, useRef, useState } from "react";
+import MapView, { Marker, Callout, PROVIDER_GOOGLE } from "react-native-maps";
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import { styles } from "../../styles/style";
+import SearchMap from "./SearchMap";
+import axios from "axios";
+import Button from "./Button";
 const latitude = -6.1753871;
 const longitude = 106.8249641;
 const latitudeDelta = 0.0922;
-const screen = Dimensions.get('window');
+const screen = Dimensions.get("window");
 const longitudeDelta = latitudeDelta * (screen.width / screen.height);
 
 // const longitudeDelta = latitudeDelta / (screen.width / screen.height);
 export default function MapOrder({ route, reference }) {
   const mapRef = useRef();
-  // const markerRef = useRef();
-
   const order = route?.params?.orderData;
 
-  const [st, setSt] = useState('');
+  const [st, setSt] = useState("");
   const [loc, setLoc] = useState({});
   const [region, setRegion] = useState({
     delta: {
@@ -42,7 +40,7 @@ export default function MapOrder({ route, reference }) {
       const lat = region.markers.latitude;
       const long = region.markers.longitude;
       axios({
-        method: 'get',
+        method: "get",
         url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyAkNQFV5IHPqRcPUwy2eibkgMyYjy0Et20`,
       })
         .then(res => {
@@ -57,7 +55,7 @@ export default function MapOrder({ route, reference }) {
     }
   }, [region.markers]);
 
-  console.log(region.markers);
+  // console.log(region.markers);
 
   return (
     <View style={{ flex: 1, ...StyleSheet.absoluteFillObject }}>
@@ -97,7 +95,7 @@ export default function MapOrder({ route, reference }) {
         <Text>{st}</Text>
       </View>
 
-      <Button order={order} reference={'map-button'} />
+      <Button location={{ loc, st }} order={order} reference={"map-button"} />
     </View>
   );
 }
