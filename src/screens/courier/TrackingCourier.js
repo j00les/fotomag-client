@@ -6,9 +6,10 @@ import * as Location from "expo-location";
 import { styles } from "../../styles/style";
 import { useEffect } from "react";
 import { useState } from "react";
-import { URL } from "../../stores/consent/consent";
+import { baseURL } from "../../constants/constants";
+// import { URL } from "../../stores/consent/consent";
 
-const socket = io(`${URL}`);
+const socket = io(`${baseURL}`);
 
 const GOOGLE_MAPS_APIKEY = "AIzaSyAkNQFV5IHPqRcPUwy2eibkgMyYjy0Et20";
 const latitudeDelta = 0.0922;

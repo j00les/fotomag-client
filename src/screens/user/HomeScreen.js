@@ -1,21 +1,18 @@
 import { Avatar } from "@rneui/themed";
 import { FlatList, View, Text, TouchableOpacity } from "react-native";
-import { data as terdekat } from "../../../server-dummy/dummy";
+import { tokoTerdekat } from "../../../server-dummy/dummy";
 import HomeCard from "../../components/user/HomeCard";
-import { CustomText, styles } from "../../styles/style";
+import { styles } from "../../styles/style";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import * as Location from "expo-location";
 import axios from "axios";
-import SearchMap from "../../components/user/SearchMap";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getToken } from "../../stores/actions/userAction";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { baseURL } from "../../constants/constants";
 import TopUp from "../../components/user/TopUp";
-import { getUserLongLat } from "../../stores/slices/userSlice";
 
 export default function HomeScreen() {
   //konteks: response midtrans buat di oper ke payment screen
@@ -26,19 +23,8 @@ export default function HomeScreen() {
   const { user } = useSelector(state => state);
   const dispatch = useDispatch();
 
-  console.log(user);
-
   const renderItem = ({ item }) => {
     return <HomeCard data={item} />;
-  };
-
-  const getData = async key => {
-    try {
-      const keyz = await AsyncStorage.getItem(key);
-      return keyz;
-    } catch (e) {
-      console.log(e);
-    }
   };
 
   useEffect(() => {
@@ -52,11 +38,11 @@ export default function HomeScreen() {
         let loc = await Location.getCurrentPositionAsync({});
 
         if (loc !== null) {
-          // console.log(loc);
-          // dispatch(getUserLongLat(loc));
+          console.log(loc);
+          dispatch(getUserLongLat(loc));
         }
-        let token = await AsyncStorage.getItem("@access_token");
-        console.log(token);
+        let token = await AsyncStorage.getItem("access_token");
+
         await axios({
           method: "patch",
           url: `${baseURL}/customer`,
@@ -98,8 +84,8 @@ export default function HomeScreen() {
     <>
       <View className="items-center justify-between flex-row px-7 py-2">
         <View>
-          <Text className="text-xl">Halo user</Text>
-          <Text>address disini</Text>
+          <Text className="text-xl">Halo Alex!</Text>
+          <Text>Jl. Sultan Iskandar Muda No.7, RT.5/RW.9, Kby. Lama</Text>
         </View>
 
         <View>
@@ -138,7 +124,7 @@ export default function HomeScreen() {
         <Text className="ml-3 text-base">Toko terdekat</Text>
 
         <View className="h-[60%]  mb-4">
-          <FlatList data={terdekat} renderItem={renderItem} />
+          <FlatList data={tokoTerdekat} renderItem={renderItem} />
         </View>
       </View>
     </>

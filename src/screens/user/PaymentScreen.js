@@ -1,9 +1,10 @@
-import { useRoute } from '@react-navigation/native';
-import { WebView } from 'react-native-webview';
+import { useRoute } from "@react-navigation/native";
+import { WebView } from "react-native-webview";
 
 export default function PaymentScreen() {
   //tangkep paramater 2 navigate
   const route = useRoute();
+  console.log(route);
 
   return (
     <>

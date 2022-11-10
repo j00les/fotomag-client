@@ -21,6 +21,7 @@
       "bundleIdentifier": "com.j00les.fotomagclient"
     },
     "android": {
+      // "softwareKeyboardLayoutMode": "pan",
       // "config": {
       //   "googleMapsApiKey": "AIzaSyAkNQFV5IHPqRcPUwy2eibkgMyYjy0Et20"
       // },

@@ -1,23 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
 
-import {
-  FlatList,
-  Modal,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { FlatList, Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changePrice,
-  registerCourier,
-} from "../../stores/merchant/reducersMerchant";
-
-import { Button, FlatList, Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { useSelector } from "react-redux";
-
+import { changePrice, registerCourier } from "../../stores/merchant/reducersMerchant";
+// import { Button, FlatList, Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default SettingMerchant = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -26,7 +13,6 @@ export default SettingMerchant = ({ navigation }) => {
   const [history, setHistory] = useState(false);
 
   const { success } = useSelector(state => {
-
     return state.merchant;
   });
   const [input, setInput] = useState({
@@ -183,10 +169,7 @@ export default SettingMerchant = ({ navigation }) => {
                     }}
                     className="mt-[5%]"
                   >
-                    <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">
-                      Ubah
-                    </Text>
-
+                    <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">Ubah</Text>
                   </TouchableOpacity>
                 </View>
               </View>

@@ -5,6 +5,8 @@ import { Modal, TouchableOpacity, Text, View, Pressable, TextInput, Image } from
 import { RadioButton } from "react-native-paper";
 import Button from "../../components/user/Button";
 import { Feather } from "@expo/vector-icons";
+import "intl";
+import "intl/locale-data/jsonp/en";
 
 import { styles } from "../../styles/style";
 
@@ -22,8 +24,16 @@ export default function DetailScreen({ route }) {
       uri: "",
       type: "",
     },
-    atkId: route.params.id,
+    atkId: route.params.detail.id,
   });
+  const { detail } = route.params;
+
+  function toRupiah(price) {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(price);
+  }
 
   const navigation = useNavigation();
 
@@ -77,22 +87,30 @@ export default function DetailScreen({ route }) {
       </View>
 
       <View className="mt-2">
-        <Text className="text-2xl">Toko Makmur jaya Abadi</Text>
-        <Text>Jalan blablabla</Text>
-        <Text>Print Warna: Rp.200/lembar</Text>
-        <Text>Print Hitam/Putih: Rp.500/lembar</Text>
-        <Text>Jilid: Rp.10.000</Text>
+        <View>
+          <Text className="text-2xl">{detail.name}</Text>
+          <Text className="text-base">{detail.location}</Text>
+          <Text className="text-base">
+            Print Warna: {toRupiah(detail.priceColor).replace("IDR", "Rp.")}/lembar
+          </Text>
+          <Text className="text-base">
+            Print Hitam/Putih: {toRupiah(detail.priceBlack).replace("IDR", "Rp.")}/lembar
+          </Text>
+          <Text className="text-base">
+            Jilid: {toRupiah(detail.priceJilid).replace("IDR", "Rp.")}
+          </Text>
+        </View>
       </View>
 
       <Pressable
-        className="rounded-md w-[15%] py-2  bg-primary self-end"
+        className="rounded-md w-[15%] py-2 mt-5  bg-primary self-start"
         onPress={() => setModalVisible(true)}
       >
         <Text className="text-white text-center ">Pesan</Text>
       </Pressable>
 
       <View style={styles.centeredView}>
-        <Modal animationType="fade" transparent={true} visible={modalVisible}>
+        <Modal animationType="fade" transparent={false} visible={modalVisible}>
           <View style={styles.centeredView}>
             <View style={styles.modalView} className="w-[65%] h-[50%]">
               <View className="flex-row items-center justify-center w-full">

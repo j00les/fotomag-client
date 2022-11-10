@@ -16,10 +16,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    marginTop: 10,
   },
 
   modalView: {
+    position: "absolute",
+    top: 0,
     padding: 20,
     margin: 20,
     backgroundColor: "white",
@@ -36,6 +38,8 @@ export const styles = StyleSheet.create({
   },
 
   modalTopUpView: {
+    position: "absolute",
+    top: 100,
     width: "50%",
     height: "30%",
     padding: 15,
