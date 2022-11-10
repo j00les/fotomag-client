@@ -1,10 +1,10 @@
 import { useRoute } from "@react-navigation/native";
 import { Button, FlatList, Text, View } from "react-native";
 import { useSelector } from "react-redux";
-import Card from "../../components/merchant/Card";
+import Card from "../../components/RegisterMap.js/Card";
 
 export default ProgressMerchant = () => {
-  const { progress } = useSelector((state) => {
+  const { progress } = useSelector(state => {
     return state.merchant;
   });
 
@@ -22,7 +22,7 @@ export default ProgressMerchant = () => {
         <View className="rounded-lg mt-3 h-full">
           <FlatList
             className="mb-5"
-            keyExtractor={(item) => item.id}
+            keyExtractor={item => item.id}
             data={progress}
             renderItem={({ item }) => (
               <Card

@@ -1,4 +1,3 @@
-import { AntDesign } from "@expo/vector-icons";
 import { useEffect, useRef, useState } from "react";
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from "react-native-maps";
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
@@ -6,13 +5,8 @@ import { styles } from "../../styles/style";
 import SearchMap from "./SearchMap";
 import axios from "axios";
 import Button from "./Button";
-const latitude = -6.1753871;
-const longitude = 106.8249641;
-const latitudeDelta = 0.0922;
-const screen = Dimensions.get("window");
-const longitudeDelta = latitudeDelta * (screen.width / screen.height);
+import { latitude, latitudeDelta, longitude, longitudeDelta } from "../../constants/constants";
 
-// const longitudeDelta = latitudeDelta / (screen.width / screen.height);
 export default function MapOrder({ route, reference }) {
   const mapRef = useRef();
   const order = route?.params?.orderData;
@@ -35,6 +29,7 @@ export default function MapOrder({ route, reference }) {
     mapRef.current?.animateToRegion({ ...coordinate, ...region.delta }, 1000);
   }
 
+  //translate long-lat ke address
   useEffect(() => {
     if (region.markers) {
       const lat = region.markers.latitude;
@@ -88,6 +83,7 @@ export default function MapOrder({ route, reference }) {
       </MapView>
 
       {/* field */}
+
       <SearchMap region={region} handleCoordinate={handleCoordinate} />
 
       <View className="absolute bottom-0 w-1/2 bg-blue-400">

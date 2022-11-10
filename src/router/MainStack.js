@@ -8,10 +8,12 @@ import { StatusBar } from "react-native";
 import { Stack } from ".";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+
 import { useState } from "react";
 import { getToken } from "../stores/actions/userAction";
 import StackCourier from "./courier/stackCourier";
 // import { getAccessToken } from '../stores/slices/userSlice';
+
 
 export default function MainStack() {
   const isLogin = true;
@@ -37,6 +39,7 @@ export default function MainStack() {
         </>
       );
     } else if (role === "Customer") {
+
       return (
         <Stack.Screen
           name="UserTab"
@@ -75,6 +78,7 @@ export default function MainStack() {
       <StatusBar />
       <Stack.Navigator>
         <Stack.Screen
+
           name="LoginScreen"
           component={LoginScreen}
           options={{ headerShown: false }}
@@ -89,6 +93,7 @@ export default function MainStack() {
           name="MerchantTab"
           component={MerchantTab}
           options={{ headerShown: false }}
+
         />
 
         <Stack.Screen
@@ -97,11 +102,13 @@ export default function MainStack() {
           options={{ headerShown: false }}
         />
 
+
         <Stack.Screen
           name="StackCourier"
           component={StackCourier}
           options={{ headerShown: false }}
         />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

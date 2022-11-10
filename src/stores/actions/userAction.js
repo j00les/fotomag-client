@@ -23,10 +23,13 @@ export const createOrder = (order) => async (dispatch, getState) => {
       atkId,
     } = order;
     const removeQt = access_token.replace(/"/g, "");
+    const { latitude, longitude } = location;
 
-    // console.log(location);
+    console.log(latitude, longitude);
 
     formData.append("address", address);
+    formData.append("latitude", latitude);
+    formData.append("longitude", longitude);
     formData.append("colorVariant", colorVariant);
     formData.append("isJilid", isJilid);
     formData.append("location", JSON.stringify(location));
@@ -55,6 +58,10 @@ export const createOrder = (order) => async (dispatch, getState) => {
   }
 };
 
-export const getToken = (val) => (dispatch) => {
-  dispatch(getAccessToken(val));
+
+export const fetchNearest = () => async dispatch => {
+  try {
+    // const {data} = await axios
+  } catch (err) {}
+
 };

@@ -8,7 +8,7 @@ import NavTab from "./Tab";
 
 export default function UserStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="">
       {/* root nav */}
       <Stack.Screen
         options={{
@@ -20,10 +20,9 @@ export default function UserStack() {
       />
 
       <Stack.Screen name="payment" component={PaymentScreen} />
-      <Stack.Screen name="detail" component={DetailScreen} />
+      <Stack.Screen name="Detail Toko" component={DetailScreen} />
       <Stack.Screen name="map-order" component={MapOrder} />
       <Stack.Screen name="order-detail" component={MapTracking} />
-
       <Stack.Screen name="Orders" component={OrderScreen} />
     </Stack.Navigator>
   );

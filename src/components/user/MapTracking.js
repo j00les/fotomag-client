@@ -47,8 +47,10 @@ export default function MapTracking({ route, reference }) {
 
     return data;
   };
+
   // slove entar
   socket.emit("updateLocation", location);
+
 
   let go = true;
   const end = () => {
@@ -57,6 +59,7 @@ export default function MapTracking({ route, reference }) {
       setPaket("Bukan delivery"),
       console.log(paket);
   };
+
   // useEffect(() => {
   let intervalID;
   // get().then(() => {
@@ -72,7 +75,7 @@ export default function MapTracking({ route, reference }) {
     // });
     if (paket === "delivery") {
       const intervalID = setInterval(() => {
-        get().then((newLoc) => socket.emit("updateLocation", newLoc));
+        get().then(newLoc => socket.emit("updateLocation", newLoc));
       }, 1000);
       setTrackingInterval(intervalID);
     } else {

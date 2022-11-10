@@ -2,13 +2,13 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import Card from "../../components/merchant/Card";
+import Card from "../../components/RegisterMap.js/Card";
 import { getListTrxCus } from "../../stores/merchant/reducersMerchant";
 
 export default HomeMerchant = () => {
   const [refresh, setRefresh] = useState(false);
   const dispatch = useDispatch();
-  const { pending } = useSelector((state) => {
+  const { pending } = useSelector(state => {
     return state.merchant;
   });
 
@@ -24,9 +24,7 @@ export default HomeMerchant = () => {
       <View className="h-[16%] w-full bg-red-300 rounded-b-3xl ">
         <View className="flex-row h-[50%] items-center justify-center mt-[3%] px-[4%]">
           <View className="">
-            <Text className="text-2xl font-bold">
-              Selamat datang, Your Name
-            </Text>
+            <Text className="text-2xl font-bold">Selamat datang, Your Name</Text>
           </View>
         </View>
       </View>

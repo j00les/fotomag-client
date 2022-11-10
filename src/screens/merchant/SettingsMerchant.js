@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
+
 import {
   FlatList,
   Modal,
@@ -14,13 +15,18 @@ import {
   registerCourier,
 } from "../../stores/merchant/reducersMerchant";
 
+import { Button, FlatList, Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useSelector } from "react-redux";
+
+
 export default SettingMerchant = ({ navigation }) => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [modalprice, setModalprice] = useState(false);
   const [history, setHistory] = useState(false);
 
-  const { success } = useSelector((state) => {
+  const { success } = useSelector(state => {
+
     return state.merchant;
   });
   const [input, setInput] = useState({
@@ -35,22 +41,20 @@ export default SettingMerchant = ({ navigation }) => {
     priceJilid: 0,
   });
 
-  const onChange = (name) => (value) => {
+  const onChange = name => value => {
     let newInput = {
       ...input,
       [name]: value,
     };
     setInput(newInput);
-    console.log(input);
   };
 
-  const onChangePrice = (name) => (value) => {
+  const onChangePrice = name => value => {
     let newInput = {
       ...price,
       [name]: value,
     };
     setPrice(newInput);
-    console.log(price);
   };
 
   const logout = async () => {
@@ -106,31 +110,26 @@ export default SettingMerchant = ({ navigation }) => {
               <View className="items-center gap-3">
                 <Text className="mb-5">Tambah Kurir Baru</Text>
                 <TextInput
-                  onChangeText={(value) => onChange("name")(value)}
+                  onChangeText={value => onChange("name")(value)}
                   placeholder="Nama"
                   className="border-2 rounded-2xl px-4 w-[75%]"
                 />
                 <TextInput
-                  onChangeText={(value) => onChange("email")(value)}
+                  onChangeText={value => onChange("email")(value)}
                   placeholder="Email"
                   keyboardType="email-address"
                   className="border-2 rounded-2xl px-4 w-[75%]"
                 />
                 <TextInput
-                  onChangeText={(value) => onChange("password")(value)}
+                  onChangeText={value => onChange("password")(value)}
                   placeholder="Kata Sandi"
                   secureTextEntry
                   className="border-2 rounded-2xl px-4 w-[75%]"
                 />
 
                 <View className="flex-row gap-2">
-                  <TouchableOpacity
-                    onPress={() => setModal(false)}
-                    className="mt-[5%]"
-                  >
-                    <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">
-                      Batal
-                    </Text>
+                  <TouchableOpacity onPress={() => setModal(false)} className="mt-[5%]">
+                    <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">Batal</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => {
@@ -139,9 +138,7 @@ export default SettingMerchant = ({ navigation }) => {
                     }}
                     className="mt-[5%]"
                   >
-                    <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">
-                      Daftar
-                    </Text>
+                    <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">Daftar</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -157,33 +154,29 @@ export default SettingMerchant = ({ navigation }) => {
               <View className="items-center gap-3">
                 <Text className="mb-5">Tambah Kurir Baru</Text>
                 <TextInput
-                  onChangeText={(value) => onChangePrice("priceColor")(value)}
+                  onChangeText={value => onChangePrice("priceColor")(value)}
                   keyboardType={"number-pad"}
                   placeholder="Harga Print Berwarna"
                   className="border-2 rounded-2xl px-4 w-[75%]"
                 />
                 <TextInput
-                  onChangeText={(value) => onChangePrice("priceBlack")(value)}
+                  onChangeText={value => onChangePrice("priceBlack")(value)}
                   keyboardType={"number-pad"}
                   placeholder="Harga Print Hitam"
                   className="border-2 rounded-2xl px-4 w-[75%]"
                 />
                 <TextInput
-                  onChangeText={(value) => onChangePrice("priceJilid")(value)}
+                  onChangeText={value => onChangePrice("priceJilid")(value)}
                   keyboardType={"number-pad"}
                   placeholder="Harga Jilid"
                   className="border-2 rounded-2xl px-4 w-[75%]"
                 />
 
                 <View className="flex-row gap-2">
-                  <TouchableOpacity
-                    onPress={() => setModalprice(false)}
-                    className="mt-[5%]"
-                  >
-                    <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">
-                      Batal
-                    </Text>
+                  <TouchableOpacity onPress={() => setModalprice(false)} className="mt-[5%]">
+                    <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">Batal</Text>
                   </TouchableOpacity>
+
                   <TouchableOpacity
                     onPress={() => {
                       dispatch(changePrice(price)), console.log(price);
@@ -193,6 +186,7 @@ export default SettingMerchant = ({ navigation }) => {
                     <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">
                       Ubah
                     </Text>
+
                   </TouchableOpacity>
                 </View>
               </View>
@@ -215,11 +209,9 @@ export default SettingMerchant = ({ navigation }) => {
               </TouchableOpacity>
             </View>
             <View className="w-[90%] h-[90%] ">
-              <Text className="text-center -top-4 font-bold">
-                Daftar Pesanan Sukses
-              </Text>
+              <Text className="text-center -top-4 font-bold">Daftar Pesanan Sukses</Text>
               <FlatList
-                keyExtractor={(item) => item.id}
+                keyExtractor={item => item.id}
                 data={success}
                 renderItem={({ item }) => (
                   <Card
