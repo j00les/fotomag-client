@@ -1,8 +1,36 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput } from "react-native";
+import { styles } from "../../styles/style";
+import { TouchableOpacity } from "react-native";
+import axios from "axios";
+import { baseURL } from "../../constants/constants";
+import { useSelector } from "react-redux";
 
 const TopUp = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [balance, setBalance] = useState(0);
+  const { user } = useSelector(state => state);
+
+  async function acquireToken() {
+    try {
+      const { data } = await axios({
+        method: "post",
+        url: `${baseURL}/balance/pay`,
+        data: {
+          nominal: balance,
+        },
+        headers: {
+          access_token: user.access_token,
+        },
+      });
+
+      setResponse(data);
+      navigation.navigate("payment", data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -15,66 +43,42 @@ const TopUp = () => {
         }}
       >
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+          <View style={styles.modalTopUpView}>
+            <Text className="text-2xl mt-4">Isi Saldo</Text>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              className="right-4 top-2 absolute"
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Feather name="x-circle" size={24} color="black" />
             </Pressable>
+
+            <View className="w-[80%] mt-[3%]">
+              <Text className="mb-1">Nominal Saldo</Text>
+              <TextInput
+                onChangeText={text => setBalance(text)}
+                keyboardType="number-pad"
+                placeholder="Isi Nominal"
+                className="border-2 rounded-lg px-4 py-1 w-full"
+              />
+
+              <TouchableOpacity
+                onPress={() => acquireToken()}
+                className="bg-primary p-2 rounded-md mt-2"
+              >
+                <Text className="text-white  text-center">Selanjutnya</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
-      <Pressable style={[styles.button, styles.buttonOpen]} onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
+      <TouchableOpacity
+        onPress={() => setModalVisible(true)}
+        className="border w-full rounded-lg bg-white"
+      >
+        <Text className="text-center p-2 uppercase">Isi Saldo</Text>
+      </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
-  },
-});
 
 export default TopUp;

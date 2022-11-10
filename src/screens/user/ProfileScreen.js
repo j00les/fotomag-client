@@ -1,6 +1,19 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
+import { logoutDong } from "../../stores/slices/userSlice";
 
 export default function ProfileScreen() {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  async function logout() {
+    await AsyncStorage.clear();
+    navigation.navigate("LoginScreen");
+    dispatch(logoutDong());
+  }
+
   return (
     <View style={styles.container}>
       <View className="border w-[500] h-[500]">
@@ -41,6 +54,10 @@ export default function ProfileScreen() {
           </View>
         </View>
       </View>
+
+      <TouchableOpacity onPress={() => logout()}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 }

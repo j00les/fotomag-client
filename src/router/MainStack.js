@@ -9,8 +9,7 @@ import { Stack } from ".";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 // import { useState } from "react";
-import { getToken } from "../stores/actions/userAction";
-// import { getAccessToken } from '../stores/slices/userSlice';
+import { getAccessToken } from "../stores/slices/userSlice";
 
 export default function MainStack() {
   const isLogin = true;
@@ -20,8 +19,7 @@ export default function MainStack() {
   const getData = async key => {
     try {
       const keyz = await AsyncStorage.getItem(key);
-      const token = JSON.parse(keyz);
-      return token;
+      return keyz;
     } catch (e) {
       console.log(e);
     }
@@ -46,25 +44,18 @@ export default function MainStack() {
     }
   };
 
-  useEffect(() => {
-    getData("@access_token").then(res => {
-      dispatch(getToken(res));
-    });
-  }, []);
+  // useEffect(() => {
+  //   getData("@access_token").then(res => {
+  //     dispatch(getAccessToken(res));
+  //   });
+  // }, []);
 
   return (
     <NavigationContainer>
       <StatusBar />
       <Stack.Navigator>
-
-        {/* <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen} /> */}
-
-        {/* <Stack.Screen name="MerchantTab" component={MerchantTab} options={{ headerShown: false }} /> */}
-
         <Stack.Screen
           options={{
-            tabBarLabel: "Home",
             headerShown: false,
           }}
           name="LoginScreen"
@@ -80,12 +71,9 @@ export default function MainStack() {
           component={RegisterScreen}
         />
 
-        <Stack.Screen name="MerchantTab" component={MerchantTab} options={{ headerShown: false }} />
-        {/* Stack.Screen name="UserTab" component={UserStack}   options={{ headerShown: false }} */}
-        {/* /> */}
-
-
         <Stack.Screen name="UserTab" component={UserStack} options={{ headerShown: false }} />
+
+        <Stack.Screen name="MerchantTab" component={MerchantTab} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

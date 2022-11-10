@@ -50,6 +50,8 @@ export const createOrder = order => async (dispatch, getState) => {
   }
 };
 
-export const getToken = val => dispatch => {
-  dispatch(getAccessToken(val));
+export const fetchNearest = () => async dispatch => {
+  try {
+    // const {data} = await axios
+  } catch (err) {}
 };

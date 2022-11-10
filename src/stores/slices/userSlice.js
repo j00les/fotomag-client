@@ -9,25 +9,35 @@ export const userSlice = createSlice({
     transactionData: null,
     //merchant register
     selectedLongLat: "",
+    userLong: "",
+    userLat: "",
   },
 
   reducers: {
     getAccessToken: (state, payload) => {
       state.access_token = payload.payload;
     },
-
     getTransactionData: (state, payload) => {
-      // console.log(payload);
       state.transactionData = payload.payload;
     },
 
-    logout: state => {
+    logoutDong: state => {
       state.access_token = "";
     },
 
     getLongLatForRegister: (state, payload) => {
       const { payload: longlat } = payload;
       state.selectedLongLat = longlat;
+    },
+
+    getUserLongLat: (state, payload) => {
+      console.log(payload.payload.coords.latitude);
+      // console.log(payload?.payload?.coords?.longitude, "ch");
+      // console.log(payload.payload.coords.latitude);
+      // console.log(payload?.payload?.coords?.latitude, "ch");
+      // console.log(payload.payload.coords.longitude, "ch");
+      state.userLat = payload?.payload?.coords?.latitude;
+      state.userLong = payload?.payload?.coords?.longitude;
     },
   },
 });
@@ -37,7 +47,8 @@ export const {
   updateTransactionToPending,
   getAccessToken,
   getTransactionData,
-  logout,
+  getUserLongLat,
+  logoutDong,
 } = userSlice.actions;
 // export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 

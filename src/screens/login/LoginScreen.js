@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { baseURL } from "../../constants/constants";
+import { useEffect } from "react";
 
 export default LoginScreen = ({ navigation }) => {
   const [token, setToken] = useState("");
@@ -13,13 +14,20 @@ export default LoginScreen = ({ navigation }) => {
   });
 
   // const navigation = useNavigation();
+  const getData = async key => {
+    try {
+      const keyz = await AsyncStorage.getItem(key);
+      return keyz;
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const storeData = async value => {
     try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@access_token", jsonValue);
+      await AsyncStorage.setItem("@access_token", value);
     } catch (e) {
-      consol.log(e);
+      console.log(e);
     }
   };
 
@@ -34,7 +42,7 @@ export default LoginScreen = ({ navigation }) => {
         },
       });
 
-      storeData(data.access_token);
+      await storeData(data.access_token);
 
       if (data.role === "Customer") {
         navigation.navigate("UserTab");
