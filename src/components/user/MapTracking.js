@@ -47,9 +47,15 @@ export default function MapTracking({ route, reference }) {
 
     return data;
   };
+
+// slove entar
+    socket.emit('updateLocation', location);
+  // };
+
   // slove entar
   socket.emit("updateLocation", location);
   // }
+
   let go = true;
   const end = () => {
     clearInterval(intervalID),
@@ -57,12 +63,14 @@ export default function MapTracking({ route, reference }) {
       setPaket("Bukan delivery"),
       console.log(paket);
   };
+
   useEffect(() => {
     let intervalID;
     // get().then(() => {
     //   console.log('izin dapet');
   });
   // development
+
 
   useEffect(() => {
     get();

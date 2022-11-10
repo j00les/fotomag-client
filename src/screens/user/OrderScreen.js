@@ -11,7 +11,9 @@ export default function OrderScreen() {
   };
 
   return (
-    <View className="h-[60%]  mb-4">
+    // <View className="h-[60%]  mb-4">
+    <View className="flex-1 pt-7 px-7">
+      <Text style={{textAlign: 'center', fontSize:24, fontWeight:'bold', marginVertical:10}}> DAFTAR PESANAN </Text>
       <FlatList data={order} renderItem={renderItem} />
     </View>
   );
