@@ -52,13 +52,6 @@ export const createOrder = order => async (dispatch, getState) => {
 
 export const fetchNearest = () => async dispatch => {
   try {
-    const response = await fetch(`${baseURL}/transaction/${atkId}`, {
-      method: "POST",
-      headers: {
-        access_token: removeQt,
-        "Content-type": "multipart/form-data",
-      },
-      body: formData,
-    });
+    // const {data} = await axios
   } catch (err) {}
 };
