@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getToken } from "../../stores/actions/userAction";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { baseURL } from "../../constants/constants";
+import TopUp from "../../components/user/TopUp";
+import { getUserLongLat } from "../../stores/slices/userSlice";
 
 export default function HomeScreen() {
   //konteks: response midtrans buat di oper ke payment screen
@@ -22,6 +24,9 @@ export default function HomeScreen() {
   const [errorMsg, setErrorMsg] = useState(null);
   const navigation = useNavigation();
   const { user } = useSelector(state => state);
+  const dispatch = useDispatch();
+
+  console.log(user);
 
   const renderItem = ({ item }) => {
     return <HomeCard data={item} />;
@@ -38,22 +43,37 @@ export default function HomeScreen() {
 
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
+      try {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          setErrorMsg("Permission to access location was denied");
+          return;
+        }
+        let loc = await Location.getCurrentPositionAsync({});
+
+        if (loc !== null) {
+          // console.log(loc);
+          // dispatch(getUserLongLat(loc));
+        }
+        let token = await AsyncStorage.getItem("@access_token");
+        console.log(token);
+        await axios({
+          method: "patch",
+          url: `${baseURL}/customer`,
+          data: {
+            latitude: user.userLat,
+            longitude: user.userLong,
+          },
+          headers: {
+            access_token: token,
+          },
+        });
+      } catch (err) {
+        console.log(err);
       }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
     })();
+  }, [user.access_token]);
 
-    //token
-  }, []);
-
-  console.log(location, "lognyah baru");
-
-  //trigger midtrans buat dapetin redirect--url
   async function acquireToken() {
     try {
       const { data } = await axios({
@@ -66,8 +86,8 @@ export default function HomeScreen() {
           access_token: user.access_token,
         },
       });
-
       setResponse(data);
+
       navigation.navigate("payment", data);
     } catch (err) {
       console.log(err);
@@ -104,12 +124,13 @@ export default function HomeScreen() {
             </View>
 
             <View className="flex-row mt-8 px-11">
-              <TouchableOpacity
+              <TopUp />
+              {/* <TouchableOpacity
                 onPress={acquireToken}
                 className="border w-full rounded-lg bg-white"
               >
                 <Text className="text-center p-2 uppercase">Top Up</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </LinearGradient>
         </View>

@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
 
   modalView: {
     padding: 20,
-
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
@@ -35,11 +34,35 @@ export const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+
+  modalTopUpView: {
+    width: "50%",
+    height: "30%",
+    padding: 15,
+    margin: "auto",
+
+    backgroundColor: "white",
+    borderRadius: 20,
+
+    alignItems: "center",
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+
   button: {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
   },
+
   buttonClose: {
     backgroundColor: "#2196F3",
   },

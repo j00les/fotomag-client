@@ -50,6 +50,15 @@ export const createOrder = order => async (dispatch, getState) => {
   }
 };
 
-export const getToken = val => dispatch => {
-  dispatch(getAccessToken(val));
+export const fetchNearest = () => async dispatch => {
+  try {
+    const response = await fetch(`${baseURL}/transaction/${atkId}`, {
+      method: "POST",
+      headers: {
+        access_token: removeQt,
+        "Content-type": "multipart/form-data",
+      },
+      body: formData,
+    });
+  } catch (err) {}
 };

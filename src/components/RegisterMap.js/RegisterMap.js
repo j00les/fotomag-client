@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 import { Feather } from "@expo/vector-icons";
+
 import { TouchableOpacity, Text, Modal, StyleSheet, View, Pressable } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { latitude, latitudeDelta, longitude, longitudeDelta } from "../../constants/constants";
