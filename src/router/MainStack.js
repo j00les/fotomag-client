@@ -8,18 +8,23 @@ import { StatusBar } from "react-native";
 import { Stack } from ".";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-// import { useState } from "react";
-import { getAccessToken } from "../stores/slices/userSlice";
+
+import { useState } from "react";
+import { getToken } from "../stores/actions/userAction";
+import StackCourier from "./courier/stackCourier";
+// import { getAccessToken } from '../stores/slices/userSlice';
+
 
 export default function MainStack() {
   const isLogin = true;
   const role = "Merchant";
   const dispatch = useDispatch();
 
-  const getData = async key => {
+  const getData = async (key) => {
     try {
       const keyz = await AsyncStorage.getItem(key);
-      return keyz;
+      let token = JSON.parse(keyz);
+      return token;
     } catch (e) {
       console.log(e);
     }
@@ -34,46 +39,76 @@ export default function MainStack() {
         </>
       );
     } else if (role === "Customer") {
-      return <Stack.Screen name="UserTab" component={UserStack} options={{ headerShown: false }} />;
+
+      return (
+        <Stack.Screen
+          name="UserTab"
+          component={UserStack}
+          options={{ headerShown: false }}
+        />
+      );
     } else if (role === "Merchant") {
       return (
-        <Stack.Screen name="MerchantTab" component={MerchantTab} options={{ headerShown: false }} />
+        <Stack.Screen
+          name="MerchantTab"
+          component={MerchantTab}
+          options={{ headerShown: false }}
+        />
       );
-    } else {
+    } else if (role === "Courier") {
       //kurir
+      return (
+        <Stack.Screen
+          name="StackCourier"
+          component={StackCourier}
+          options={{ headerShown: false }}
+        />
+      );
     }
   };
 
-  // useEffect(() => {
-  //   getData("@access_token").then(res => {
-  //     dispatch(getAccessToken(res));
-  //   });
-  // }, []);
+  useEffect(() => {
+    getData("access_token").then((res) => {
+      dispatch(getToken(res));
+    });
+  }, []);
 
   return (
     <NavigationContainer>
       <StatusBar />
       <Stack.Navigator>
         <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
+
           name="LoginScreen"
           component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="RegisterScreen"
+          component={RegisterScreen}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
-          options={{
-            tabBarLabel: "Home",
-            headerShown: false,
-          }}
-          name="RegisterScreen"
-          component={RegisterScreen}
+          name="MerchantTab"
+          component={MerchantTab}
+          options={{ headerShown: false }}
+
         />
 
-        <Stack.Screen name="UserTab" component={UserStack} options={{ headerShown: false }} />
+        <Stack.Screen
+          name="UserTab"
+          component={UserStack}
+          options={{ headerShown: false }}
+        />
 
-        <Stack.Screen name="MerchantTab" component={MerchantTab} options={{ headerShown: false }} />
+
+        <Stack.Screen
+          name="StackCourier"
+          component={StackCourier}
+          options={{ headerShown: false }}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

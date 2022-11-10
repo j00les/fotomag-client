@@ -1,12 +1,32 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
+
+import {
+  FlatList,
+  Modal,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changePrice,
+  registerCourier,
+} from "../../stores/merchant/reducersMerchant";
+
 import { Button, FlatList, Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
 
+
 export default SettingMerchant = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [modalprice, setModalprice] = useState(false);
   const [history, setHistory] = useState(false);
+
   const { success } = useSelector(state => {
+
     return state.merchant;
   });
   const [input, setInput] = useState({
@@ -35,6 +55,11 @@ export default SettingMerchant = ({ navigation }) => {
       [name]: value,
     };
     setPrice(newInput);
+  };
+
+  const logout = async () => {
+    await AsyncStorage.clear();
+    navigation.navigate("LoginScreen");
   };
 
   return (
@@ -68,7 +93,7 @@ export default SettingMerchant = ({ navigation }) => {
                 <Text>Ubah Harga</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => navigation.navigate("LoginScreen")}
+                onPress={() => logout()}
                 className="bg-yellow-200 h-[5%] justify-center items-center w-full mb-[3%]"
               >
                 <Text>Keluar</Text>
@@ -108,6 +133,7 @@ export default SettingMerchant = ({ navigation }) => {
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => {
+                      dispatch(registerCourier(input));
                       console.log(input);
                     }}
                     className="mt-[5%]"
@@ -150,8 +176,17 @@ export default SettingMerchant = ({ navigation }) => {
                   <TouchableOpacity onPress={() => setModalprice(false)} className="mt-[5%]">
                     <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">Batal</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() => console.log(price)} className="mt-[5%]">
-                    <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">Ubah</Text>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      dispatch(changePrice(price)), console.log(price);
+                    }}
+                    className="mt-[5%]"
+                  >
+                    <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">
+                      Ubah
+                    </Text>
+
                   </TouchableOpacity>
                 </View>
               </View>

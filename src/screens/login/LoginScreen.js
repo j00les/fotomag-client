@@ -1,10 +1,17 @@
+
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import LottieView from "lottie-react-native";
 import { useState } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { URL } from "../../stores/consent/consent";
+
+const baseURL = URL;
+
 import { baseURL } from "../../constants/constants";
 import { useEffect } from "react";
+
 
 export default LoginScreen = ({ navigation }) => {
   const [token, setToken] = useState("");
@@ -13,8 +20,9 @@ export default LoginScreen = ({ navigation }) => {
     password: "",
   });
 
-  // const navigation = useNavigation();
-  const getData = async key => {
+
+  const getData = async (key) => {
+
     try {
       const keyz = await AsyncStorage.getItem(key);
       return keyz;
@@ -23,9 +31,11 @@ export default LoginScreen = ({ navigation }) => {
     }
   };
 
-  const storeData = async value => {
+  const storeData = async (value) => {
     try {
-      await AsyncStorage.setItem("@access_token", value);
+
+      await AsyncStorage.setItem("access_token", value);
+
     } catch (e) {
       console.log(e);
     }
@@ -42,14 +52,18 @@ export default LoginScreen = ({ navigation }) => {
         },
       });
 
+
       await storeData(data.access_token);
+
 
       if (data.role === "Customer") {
         navigation.navigate("UserTab");
       } else if (data.role === "Merchant") {
         navigation.navigate("MerchantTab");
       } else if (data.role === "Courier") {
-        navigation.navigate("MerchantTab");
+
+        navigation.navigate("StackCourier");
+
       }
     } catch (err) {
       console.log(err);
@@ -68,9 +82,11 @@ export default LoginScreen = ({ navigation }) => {
           </View>
         </View>
 
+
         <View className="h-[75%] w-full  mx-auto  rounded-b-2xl">
           <LottieView
             className="ml-4"
+
             source={require("../../../assets/merchanLottie/Login.json")}
             autoPlay
             loop
@@ -82,14 +98,14 @@ export default LoginScreen = ({ navigation }) => {
           <View className="gap-1">
             <Text>Email</Text>
             <TextInput
-              onChangeText={text => setCred({ ...cred, email: text })}
+              onChangeText={(text) => setCred({ ...cred, email: text })}
               className="border-2 rounded-lg px-2"
             />
           </View>
           <View className="gap-1 mb-2">
             <Text>Password</Text>
             <TextInput
-              onChangeText={text => setCred({ ...cred, password: text })}
+              onChangeText={(text) => setCred({ ...cred, password: text })}
               secureTextEntry
               className="border-2 rounded-lg px-2"
             />
@@ -104,11 +120,13 @@ export default LoginScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
 
+
           <View className="items-center text-center flex-row  justify-center pt-3 gap-1">
             <Text className="text-center">Belum memiliki akun?</Text>
 
             <TouchableOpacity onPress={() => navigation.navigate("RegisterScreen")}>
               <Text className="text-red-400">Buat sekarang</Text>
+
             </TouchableOpacity>
           </View>
         </View>

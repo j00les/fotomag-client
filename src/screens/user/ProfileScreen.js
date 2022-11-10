@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
@@ -58,6 +59,7 @@ export default function ProfileScreen() {
       <TouchableOpacity onPress={() => logout()}>
         <Text>Logout</Text>
       </TouchableOpacity>
+
     </View>
   );
 }

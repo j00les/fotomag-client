@@ -43,6 +43,7 @@ export const userSlice = createSlice({
 });
 
 export const {
+
   getLongLatForRegister,
   updateTransactionToPending,
   getAccessToken,
@@ -51,5 +52,6 @@ export const {
   logoutDong,
 } = userSlice.actions;
 // export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+
 
 export default userSlice.reducer;

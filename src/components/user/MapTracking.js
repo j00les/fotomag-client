@@ -1,9 +1,9 @@
-import { AntDesign } from "@expo/vector-icons";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import MapViewDirections from "react-native-maps-directions";
-import MapView, { Marker, Callout, PROVIDER_GOOGLE } from "react-native-maps";
-import { View, Dimensions, Button } from "react-native";
+import MapView from "react-native-maps";
+import { Button, Dimensions } from "react-native";
 import { styles } from "../../styles/style";
+
 const latitude = -6.1753871;
 const longitude = 106.8249641;
 const latitudeDelta = 0.0922;
@@ -48,13 +48,9 @@ export default function MapTracking({ route, reference }) {
     return data;
   };
 
-// slove entar
-    socket.emit('updateLocation', location);
-  // };
-
   // slove entar
   socket.emit("updateLocation", location);
-  // }
+
 
   let go = true;
   const end = () => {
@@ -64,13 +60,12 @@ export default function MapTracking({ route, reference }) {
       console.log(paket);
   };
 
-  useEffect(() => {
-    let intervalID;
-    // get().then(() => {
-    //   console.log('izin dapet');
-  });
+  // useEffect(() => {
+  let intervalID;
+  // get().then(() => {
+  //   console.log('izin dapet');
+  // });
   // development
-
 
   useEffect(() => {
     get();
@@ -109,7 +104,6 @@ export default function MapTracking({ route, reference }) {
       >
         <MapView.Marker coordinate={coordinates[0]} />
         <MapView.Marker coordinate={coordinates[1]} />
-
         <MapViewDirections
           origin={coordinates[0]}
           destination={coordinates[1]}
