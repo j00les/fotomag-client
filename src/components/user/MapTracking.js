@@ -43,26 +43,34 @@ export default function MapTracking({ route, reference }) {
     let data = await Location.getCurrentPositionAsync({});
     console.log(data, "ini location di client");
     setLocation(data);
-// merchant
+    // merchant
 
     return data;
   };
+
 // slove entar
     socket.emit('updateLocation', location);
   // };
+
+  // slove entar
+  socket.emit("updateLocation", location);
+  // }
+
   let go = true;
   const end = () => {
     clearInterval(intervalID),
-      console.log('masuk end'),
-      setPaket('Bukan delivery'),
+      console.log("masuk end"),
+      setPaket("Bukan delivery"),
       console.log(paket);
   };
-  // useEffect(() => {
-  //   let intervalID;
-  //   // get().then(() => {
-  //   //   console.log('izin dapet');
-  //   // });
-// development
+
+  useEffect(() => {
+    let intervalID;
+    // get().then(() => {
+    //   console.log('izin dapet');
+  });
+  // development
+
 
   useEffect(() => {
     get();
@@ -72,7 +80,7 @@ export default function MapTracking({ route, reference }) {
     // });
     if (paket === "delivery") {
       const intervalID = setInterval(() => {
-        get().then((newLoc) => socket.emit("updateLocation", newLoc));
+        get().then(newLoc => socket.emit("updateLocation", newLoc));
       }, 1000);
       setTrackingInterval(intervalID);
     } else {

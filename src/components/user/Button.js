@@ -26,6 +26,7 @@ export default function Button({ reference, func, order }) {
   {
     /* <TouchableOpacity
         onPress={() => retrievePdf}
+
         className="border rounded-md  w-[15%] py-2 bg-white self-end"
       >
         <Text className="text-center uppercase"> Sematkan file</Text>
@@ -37,9 +38,9 @@ export default function Button({ reference, func, order }) {
     return (
       <TouchableOpacity
         onPress={() => func()}
-        className="border  rounded-md mx-auto w-[100%] py-2 bg-white self-end"
+        className="bg-secondary rounded-md mx-auto w-[100%] py-2  self-end"
       >
-        <Text className="text-center uppercase">Unggah dokumen</Text>
+        <Text className="text-center text-white uppercase">Unggah dokumen</Text>
       </TouchableOpacity>
     );
   } else if (reference === "detail-map") {
