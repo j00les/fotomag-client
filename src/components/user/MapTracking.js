@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import MapViewDirections from "react-native-maps-directions";
 import MapView from "react-native-maps";
-import { Dimensions } from "react-native";
+import { Button, Dimensions } from "react-native";
 import { styles } from "../../styles/style";
 
 const latitude = -6.1753871;
@@ -101,7 +101,6 @@ export default function MapTracking({ route, reference }) {
       >
         <MapView.Marker coordinate={coordinates[0]} />
         <MapView.Marker coordinate={coordinates[1]} />
-
         <MapViewDirections
           origin={coordinates[0]}
           destination={coordinates[1]}

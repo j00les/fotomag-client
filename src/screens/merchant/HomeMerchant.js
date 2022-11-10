@@ -1,3 +1,4 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,9 +12,12 @@ export default HomeMerchant = () => {
     return state.merchant;
   });
 
-  useEffect(() => {
+  useFocusEffect(() => {
     dispatch(getListTrxCus());
-  }, []);
+  });
+  // useEffect(() => {
+  //   dispatch(getListTrxCus());
+  // }, []);
 
   return (
     <View className="flex-1 items-center ">

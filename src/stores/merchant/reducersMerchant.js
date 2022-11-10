@@ -1,22 +1,21 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
-const URL = "https://e07d-36-78-13-68.ap.ngrok.io";
+import { URL } from "../consent/consent";
 
 // ============================================== Fetch =============================================
 
 export const getListTrxCus = createAsyncThunk("getListTrxCus", async () => {
   try {
+    let token = await AsyncStorage.getItem("access_token");
     let { data } = await axios.get(
       `${URL}/transaction/listTransactionCustomer`,
       {
         headers: {
-          access_token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY3OTI2MDc1fQ.6eEWanIQksBpy5dbSzhEaYhzza5MbK0u-WMW7i6i1K4",
+          access_token: token,
         },
       }
     );
-    console.log(data, "reducs");
     return data;
   } catch (error) {
     console.log(error);
@@ -29,9 +28,10 @@ export const changeStatusProgress = createAsyncThunk(
   "changeStatusProgress",
   async (id) => {
     try {
+      let token = await AsyncStorage.getItem("access_token");
       await axios.patch(`${URL}/transaction/progress/${id}`, null, {
         headers: {
-          access_token: "",
+          access_token: token,
         },
       });
       getListTrxCus();
@@ -45,9 +45,10 @@ export const changeStatusReject = createAsyncThunk(
   "changeStatusReject",
   async (id) => {
     try {
+      let token = await AsyncStorage.getItem("access_token");
       await axios.patch(`${URL}/transaction/reject/${id}`, null, {
         headers: {
-          access_token: "",
+          access_token: token,
         },
       });
       getListTrxCus();
@@ -61,9 +62,10 @@ export const changeStatusDone = createAsyncThunk(
   "changeStatusDone",
   async (id) => {
     try {
+      let token = await AsyncStorage.getItem("access_token");
       await axios.patch(`${URL}/transaction/done/${id}`, null, {
         headers: {
-          access_token: "",
+          access_token: token,
         },
       });
       getListTrxCus();
@@ -79,9 +81,10 @@ export const registerCourier = createAsyncThunk(
   "registerCourier",
   async (input) => {
     try {
+      let token = await AsyncStorage.getItem("access_token");
       await axios.post(`${URL}/courier/register`, input, {
         headers: {
-          access_token: "",
+          access_token: token,
         },
       });
     } catch (error) {
@@ -92,20 +95,18 @@ export const registerCourier = createAsyncThunk(
 
 // ============================================= Harga Edit ====================================
 
-export const changePrice = createAsyncThunk(
-  "changePrice",
-  async (atkId, input) => {
-    try {
-      await axios.post(`${URL}/merchant/${atkId}`, input, {
-        headers: {
-          access_token: "",
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
+export const changePrice = createAsyncThunk("changePrice", async (input) => {
+  try {
+    let token = await AsyncStorage.getItem("access_token");
+    await axios.patch(`${URL}/merchant`, input, {
+      headers: {
+        access_token: token,
+      },
+    });
+  } catch (error) {
+    console.log(error);
   }
-);
+});
 
 // =============================================== SLICE ==========================================
 
@@ -125,7 +126,6 @@ const merchantSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getListTrxCus.fulfilled, (state, action) => {
-      console.log(action);
       let data = action.payload;
       state.pending = data.filter((e) => e.status === "Pending");
       state.progress = data.filter((e) => e.status === "Progress");

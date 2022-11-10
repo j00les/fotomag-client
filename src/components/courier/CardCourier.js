@@ -25,13 +25,7 @@ export default CardCourier = ({
             <Text>Alamat : {alamat}</Text>
           </View>
           <View className="w-full items-center">
-            <View className="w-[95%] flex-row mt-[4%] justify-between">
-              <TouchableOpacity
-                onPress={() => reject(id)}
-                className="w-[45%] bg-red-500"
-              >
-                <Text className="text-center">Tolak</Text>
-              </TouchableOpacity>
+            <View className="w-[95%] flex-row mt-[4%] justify-center">
               <TouchableOpacity
                 onPress={() => progress(id)}
                 className="w-[45%] bg-green-500 "

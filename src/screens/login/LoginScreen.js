@@ -3,8 +3,9 @@ import LottieView from "lottie-react-native";
 import { useState } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { URL } from "../../stores/consent/consent";
 
-const baseURL = "https://e07d-36-78-13-68.ap.ngrok.io";
+const baseURL = URL;
 export default LoginScreen = ({ navigation }) => {
   const [token, setToken] = useState("");
   const [cred, setCred] = useState({
@@ -23,8 +24,8 @@ export default LoginScreen = ({ navigation }) => {
 
   const storeData = async (value) => {
     try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("access_token", jsonValue);
+      // const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("access_token", value);
     } catch (e) {
       consol.log(e);
     }
@@ -44,7 +45,7 @@ export default LoginScreen = ({ navigation }) => {
 
       // taruh redux
       //set-item
-      storeData(data.access_token);
+      await storeData(data.access_token);
       // set//nama-user
       //  set // role
       // set//islogin

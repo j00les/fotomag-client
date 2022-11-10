@@ -8,12 +8,18 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changePrice,
+  registerCourier,
+} from "../../stores/merchant/reducersMerchant";
 
 export default SettingMerchant = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [modalprice, setModalprice] = useState(false);
   const [history, setHistory] = useState(false);
+
   const { success } = useSelector((state) => {
     return state.merchant;
   });
@@ -128,6 +134,7 @@ export default SettingMerchant = ({ navigation }) => {
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => {
+                      dispatch(registerCourier(input));
                       console.log(input);
                     }}
                     className="mt-[5%]"
@@ -178,7 +185,9 @@ export default SettingMerchant = ({ navigation }) => {
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    onPress={() => console.log(price)}
+                    onPress={() => {
+                      dispatch(changePrice(price)), console.log(price);
+                    }}
                     className="mt-[5%]"
                   >
                     <Text className="border-2 text-center px-[5%] py-1 rounded-2xl">

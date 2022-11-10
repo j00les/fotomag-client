@@ -1,20 +1,18 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useState } from "react";
-
-const URL = "https://e07d-36-78-13-68.ap.ngrok.io";
+import { URL } from "../consent/consent";
 
 // ============================== Fetch ========================
 
 export const getListTrxCou = createAsyncThunk("getListTrxCou", async () => {
   try {
+    let token = await AsyncStorage.getItem("access_token");
     let { data } = await axios.get(
       `${URL}/transaction/listTransactionCourier`,
       {
         headers: {
-          access_token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY4MDEyMjE5fQ.y3kVpw2wmNH2I-jGzFYwzjaKPHW78eNpB1DscpIOYhE",
+          access_token: token,
         },
       }
     );

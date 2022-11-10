@@ -30,8 +30,10 @@ export default HomeCourier = ({ navigation }) => {
                 Selamat datang, Your Name
               </Text>
               <Button title="keluar" onPress={() => logout()} />
-              <Button title="lol" onPress={() => get()} />
-              <Button title="lol" onPress={() => coba()} />
+              <Button
+                title="Maps"
+                onPress={() => navigation.navigate("TrackingCourier")}
+              />
             </View>
           </View>
         </View>
