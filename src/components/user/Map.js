@@ -50,8 +50,6 @@ export default function MapOrder({ route, reference }) {
     }
   }, [region.markers]);
 
-  // console.log(region.markers);
-
   return (
     <View style={{ flex: 1, ...StyleSheet.absoluteFillObject }}>
       <MapView
@@ -81,8 +79,6 @@ export default function MapOrder({ route, reference }) {
       >
         <Marker coordinate={region.markers} />
       </MapView>
-
-      {/* field */}
 
       <SearchMap region={region} handleCoordinate={handleCoordinate} />
 

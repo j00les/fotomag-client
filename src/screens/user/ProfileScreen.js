@@ -13,6 +13,7 @@ export default function ProfileScreen() {
     await AsyncStorage.clear();
     navigation.navigate("LoginScreen");
     dispatch(logoutDong());
+    return;
   }
 
   return (
@@ -59,7 +60,6 @@ export default function ProfileScreen() {
       <TouchableOpacity onPress={() => logout()}>
         <Text>Logout</Text>
       </TouchableOpacity>
-
     </View>
   );
 }

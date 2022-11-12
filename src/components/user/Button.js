@@ -15,6 +15,7 @@ export default function Button({ reference, func, order }) {
   const navigation = useNavigation();
 
   function proceedOrder() {
+    console.log("masok");
     dispatch(createOrder(order));
     if (user.transactionData) {
       navigation.navigate("Orders");
@@ -58,7 +59,6 @@ export default function Button({ reference, func, order }) {
     return (
       <TouchableOpacity
         onPress={() => proceedOrder()}
-        // onPress={() => dispatch(createOrder(order))}
         className="border rounded-md  py-2 bg-white self-end absolute bottom-2 right-4"
       >
         <Text className="text-center uppercase"> Selanjutnya</Text>

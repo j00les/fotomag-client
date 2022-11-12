@@ -1,12 +1,12 @@
-import { View, Text, TouchableOpacity, StyleSheet, Button} from 'react-native';
-import { Avatar } from '@rneui/themed';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, TouchableOpacity, StyleSheet, Button } from "react-native";
+import { Avatar } from "@rneui/themed";
+import { useNavigation } from "@react-navigation/native";
 
 export default function OrderCard({ data: order }) {
   const navigation = useNavigation();
   return (
     <>
-    {/* <TouchableOpacity
+      {/* <TouchableOpacity
       // <Stack.Screen name="order-detail" component={MapTracking} />
       onPress={() => navigation.navigate('order-detail', { id: order.id })}
       className="border-b rounded-lg mt-2 p-4 flex-row"
@@ -23,55 +23,59 @@ export default function OrderCard({ data: order }) {
         <Text>{order.address}</Text>
       </View>
     </TouchableOpacity> */}
-    
-    <View className="border rounded-lg mt-4 p-1">
-      <View style={styles.insideView1}>
-        <Text>JANGAN LUPA FETCH NAMA TOKO</Text>
+
+      <View className="border rounded-lg mt-4 p-4">
+        <View className="flex-row-reverse">
+          <TouchableOpacity className="bg-yellow-500 items-center justify-center w-[100] mx-auto rounded-md">
+            <Text className="bg-red items-center justify-center text-center uppercase text-white">
+              diantar
+            </Text>
+          </TouchableOpacity>
+
+          <Text className="text-lg mr-36">Toko Hanif</Text>
         </View>
-        <View style={styles.mainView}>
-          <View style={styles.view1}>
-            <Button title="Pesanan Selesai" style={styles.statusButton} />
-          </View>
-          <View style={styles.view2}>
-          <Button title="Lihat Detail" style={styles.detailButton} onPress={() => navigation.navigate('order-detail', { id: order.id })} />
-          </View>
+
+        <View className="flex-row">
+          <Text>Order ID: </Text>
+          <Text>1</Text>
         </View>
-        <Text style={{textAlign: 'center', marginTop: 10}} >fetch status </Text>
-    </View>
+        <View className="flex-row">
+          <Text>Total lembar: </Text>
+          <Text>10</Text>
+        </View>
 
+        <View className="flex-row">
+          <Text>Tujuan: </Text>
+          <Text>Jl. Sultan Iskandar Muda No.20, Pondok Pinang</Text>
+        </View>
 
-
+        <TouchableOpacity
+          onPress={() => navigation.navigate("History")}
+          className="bg-primary w-[100] mx-auto rounded-md"
+        >
+          <Text className="bg-red text-center uppercase text-white">Selesai</Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  insideView1: {
-    flex: 1,
-    // backgroundColor: 'blue',
-    alignItems: 'center',
-    marginTop: 2,
-    fontSize: 20,
-    fontWeight: 'bold'
-  },
   mainView: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
     // backgroundColor: "yellow",
     marginTop: 10,
-    alignContent: 'space-between'
+    alignContent: "space-between",
   },
   view1: {
     alignSelf: "flex-start",
-    marginEnd : 40,
-    marginStart : 10
-    
+    marginEnd: 40,
+    marginStart: 10,
   },
   view2: {
-    marginStart : 40,
-    alignSelf: 'flex-end'
+    marginStart: 40,
+    alignSelf: "flex-end",
   },
-  detailButton: {
-
-  }
-})
+  detailButton: {},
+});

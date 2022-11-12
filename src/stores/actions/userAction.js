@@ -1,31 +1,22 @@
-const baseURL = "https://84c7-36-78-13-68.ap.ngrok.io";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+const baseURL = "https://5847-36-78-13-68.ap.ngrok.io";
+
 import {
   getAccessToken,
   getTransactionData,
   updateTransactionToPending,
 } from "../slices/userSlice";
 
-export const createOrder = (order) => async (dispatch, getState) => {
+export const createOrder = order => async (dispatch, getState) => {
+  console.log("masuk ga sih");
+
   try {
     const formData = new FormData();
-    const { access_token } = getState().user;
-
-    const {
-      address,
-      fileUrl,
-      colorVariant,
-      isJilid,
-      duplicate,
-      location,
-      atkId,
-    } = order;
-    const removeQt = access_token.replace(/"/g, "");
+    let token = await AsyncStorage.getItem("access_token");
+    const { address, fileUrl, colorVariant, isJilid, duplicate, location, atkId } = order;
     const { latitude, longitude } = location;
-
-    console.log(latitude, longitude);
 
     formData.append("address", address);
     formData.append("latitude", latitude);
@@ -40,28 +31,26 @@ export const createOrder = (order) => async (dispatch, getState) => {
       name: fileUrl.name,
     });
 
+    // console.log(`${baseURL}/transaction/${atkId}`);
     const response = await fetch(`${baseURL}/transaction/${atkId}`, {
       method: "POST",
       headers: {
-        access_token: removeQt,
+        access_token: token,
         "Content-type": "multipart/form-data",
       },
       body: formData,
     });
 
     const responseJson = await response.json();
-    // console.log(responseJson);
+
     dispatch(getTransactionData(responseJson));
-    // if (!responseJson.ok) throw ;
   } catch (err) {
     console.log(err);
   }
 };
 
-
 export const fetchNearest = () => async dispatch => {
   try {
     // const {data} = await axios
   } catch (err) {}
-
 };

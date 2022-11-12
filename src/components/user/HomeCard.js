@@ -6,7 +6,7 @@ export default function HomeCard({ data: merchantData }) {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("Detail Toko", { id: merchantData.id })}
+      onPress={() => navigation.navigate("Detail Toko", { detail: merchantData })}
       className="border-b rounded-lg mt-2 p-4 flex-row"
     >
       <View className="lk">
@@ -18,7 +18,7 @@ export default function HomeCard({ data: merchantData }) {
       </View>
       <View className="ml-4">
         <Text className="text-base">{merchantData.name}</Text>
-        <Text>{merchantData.address}</Text>
+        <Text>{merchantData.location}</Text>
       </View>
     </TouchableOpacity>
   );
