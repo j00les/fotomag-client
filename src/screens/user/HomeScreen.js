@@ -85,7 +85,7 @@ export default function HomeScreen() {
       <View className="items-center justify-between flex-row px-7 py-2">
         <View>
           <Text className="text-xl">Halo Alex!</Text>
-          <Text>Jl. Sultan Iskandar Muda No.7, RT.5/RW.9, Kby. Lama</Text>
+          <Text className="text-sm">Jl. Sultan Iskandar Muda No.7, RT.5/RW.9</Text>
         </View>
 
         <View>
@@ -106,7 +106,7 @@ export default function HomeScreen() {
           >
             <View className="items-center mt-4">
               <Text className="text-white mb-2">Saldo</Text>
-              <Text className="text-4xl text-white">Rp.2.000.000</Text>
+              <Text className="text-4xl text-white">Rp.76.000</Text>
             </View>
 
             <View className="flex-row mt-8 px-11">

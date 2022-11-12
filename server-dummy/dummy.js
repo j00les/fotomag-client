@@ -32,7 +32,7 @@ export const tokoTerdekat = [
     priceJilid: 5000,
     UserId: 2,
     location:
-      "Pejaten Office Park, Jl. Hj. Tutty Alawiyah No.F79, RW.7, Pejaten Bar., Kec. Ps. Minggu",
+      "Jl. Tanah Kusir IV No.B49, RT.5/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240",
   },
   {
     id: 2,

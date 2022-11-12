@@ -19,7 +19,7 @@ export default function UserStack() {
         component={NavTab}
       />
 
-      <Stack.Screen name="payment" component={PaymentScreen} />
+      <Stack.Screen name="Bayar" component={PaymentScreen} />
       <Stack.Screen name="Detail Toko" component={DetailScreen} />
       <Stack.Screen name="map-order" component={MapOrder} />
       <Stack.Screen name="order-detail" component={MapTracking} />

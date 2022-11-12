@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const baseURL = "https://16be-139-228-111-125.ap.ngrok.io";
+const baseURL = "https://5847-36-78-13-68.ap.ngrok.io";
 
 import {
   getAccessToken,

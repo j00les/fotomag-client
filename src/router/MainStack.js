@@ -6,6 +6,7 @@ import UserStack from "./user/Stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "react-native";
 import { Stack } from ".";
+import LottieSucc from "../components/user/LottieSucc";
 import StackCourier from "./courier/stackCourier";
 
 export default function MainStack() {
@@ -59,6 +60,7 @@ export default function MainStack() {
           component={StackCourier}
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="StackAnim" component={LottieSucc} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -22,7 +22,7 @@ export default LoginScreen = ({ navigation }) => {
 
   const loginHandler = async () => {
     try {
-      console.log("masok login");
+      // console.log("masok login");
       const { data } = await axios({
         url: `${baseURL}/login`,
         method: "post",

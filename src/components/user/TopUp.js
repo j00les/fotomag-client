@@ -7,11 +7,12 @@ import axios from "axios";
 import { baseURL } from "../../constants/constants";
 import { useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 const TopUp = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [balance, setBalance] = useState(0);
-  // const { user } = useSelector(state => state);
+  const navigation = useNavigation();
 
   async function acquireToken() {
     try {
@@ -29,8 +30,7 @@ const TopUp = () => {
       });
       console.log(data);
 
-      // setResponse(data);
-      navigation.navigate("payment", data);
+      navigation.navigate("Bayar", data);
     } catch (err) {
       console.log(err);
     }
